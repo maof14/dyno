@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dyno-server", "dyno-server\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dyno-gui", "dyno-gui\dyno-gui.csproj", "{AAF89452-2BC5-4C4E-8357-60120C903667}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{5DFC64E5-104F-4B63-9B5E-06E6A47BD2E5}"
+	ProjectSection(SolutionItems) = preProject
+		dyno.targets = dyno.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
