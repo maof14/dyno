@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dyno-api", "dyno-api\dyno-api.csproj", "{B99B5517-8C00-4442-9391-BC2307A7E38C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-api", "dyno-api\dyno-api.csproj", "{B99B5517-8C00-4442-9391-BC2307A7E38C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dyno-server", "dyno-server\dyno-server.csproj", "{15E251D7-7710-4EAF-9715-51120323B90C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-server", "dyno-server\dyno-server.csproj", "{15E251D7-7710-4EAF-9715-51120323B90C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dyno-gui", "dyno-gui\dyno-gui.csproj", "{AAF89452-2BC5-4C4E-8357-60120C903667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-gui", "dyno-gui\dyno-gui.csproj", "{AAF89452-2BC5-4C4E-8357-60120C903667}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{5DFC64E5-104F-4B63-9B5E-06E6A47BD2E5}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +17,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DCB91400-669C-4A02-B761-81F580B670C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{CCFF7BCD-DDA3-4C7E-951A-2A26ED11E7D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{310C4DF2-64C4-452C-86DA-FEE36D299253}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contract", "Contract", "{223E0489-B2D7-4212-8217-14139BDC8D9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{4796417D-E4C0-49EF-ADC2-24684F0BCACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,12 +48,27 @@ Global
 		{CCFF7BCD-DDA3-4C7E-951A-2A26ED11E7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCFF7BCD-DDA3-4C7E-951A-2A26ED11E7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCFF7BCD-DDA3-4C7E-951A-2A26ED11E7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4796417D-E4C0-49EF-ADC2-24684F0BCACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4796417D-E4C0-49EF-ADC2-24684F0BCACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4796417D-E4C0-49EF-ADC2-24684F0BCACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4796417D-E4C0-49EF-ADC2-24684F0BCACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CCFF7BCD-DDA3-4C7E-951A-2A26ED11E7D8} = {DCB91400-669C-4A02-B761-81F580B670C9}
+		{310C4DF2-64C4-452C-86DA-FEE36D299253} = {DCB91400-669C-4A02-B761-81F580B670C9}
+		{4796417D-E4C0-49EF-ADC2-24684F0BCACB} = {223E0489-B2D7-4212-8217-14139BDC8D9C}
+		{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5} = {DCB91400-669C-4A02-B761-81F580B670C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {256186D7-C4FD-45A3-A3A5-FC7D294ED565}
