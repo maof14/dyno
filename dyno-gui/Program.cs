@@ -1,10 +1,15 @@
 using dyno_gui.Components;
+using dyno_gui.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddTransient<IHubClient, HubClient>();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 

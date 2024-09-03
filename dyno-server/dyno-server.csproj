@@ -7,4 +7,8 @@
     <RootNamespace>dyno_server</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.20" />
+  </ItemGroup>
+
 </Project>
