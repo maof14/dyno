@@ -1,4 +1,5 @@
 ﻿using Flurl;
+using Infrastructure;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace dyno_gui.SignalR;
@@ -20,7 +21,14 @@ public class HubClient : IHubClient
     public HubClient()
     {
         var url = "https://localhost:7239"; // Todo make configurable
-        _hubConnection = new HubConnectionBuilder().WithUrl(url.AppendPathSegment("/dynohub")).Build();
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl(url.AppendPathSegment("/dynohub"))
+            .Build();
+
+        _hubConnection.On(SignalRConstants.MeasurementCompleted, () =>
+        {
+            // En mätning är klar, visa en toast.
+        });
     }
 
     public async Task ConnectAsync()

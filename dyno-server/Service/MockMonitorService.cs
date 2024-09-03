@@ -21,20 +21,23 @@ namespace dyno_server.Service
             return;
         }
 
-        public async void StartMonitoring()
+        public async Task StartMonitoring()
         {
             _result = new MonitorResult(Guid.NewGuid());
             for (var i = 0; i < 50; i++)
             {
                 var rnd = new Random();
-                _result.AddDataPoint(new Result(dataPoint: rnd.Next(1, 50), dateTimeRecorded: DateTimeOffset.UtcNow));
+                _result.AddDataPoint(new Result(
+                    dataPoint: rnd.Next(1, 50),
+                    dateTimeRecorded: DateTimeOffset.UtcNow));
+
                 await Task.Delay(20);
             }
         }
 
         public void StopMonitoring()
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

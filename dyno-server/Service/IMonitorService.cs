@@ -7,7 +7,7 @@ namespace dyno_server.Service
         void Initialize(); // Sätt upp koppling mot GPIO
         void Cleanup(); // Rensa upp resurser
 
-        void StartMonitoring(); // Starta en monitorering
+        Task StartMonitoring(); // Starta en monitorering
         void StopMonitoring();
         MonitorResult GetResult();
     }
