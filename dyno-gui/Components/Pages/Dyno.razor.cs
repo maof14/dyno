@@ -1,6 +1,9 @@
 using dyno_gui.Client;
 using dyno_gui.SignalR;
+using dyno_gui.Store.Measurements;
+using Fluxor;
 using Microsoft.AspNetCore.Components;
+using ViewModels;
 
 namespace dyno_gui.Components.Pages;
 
@@ -12,9 +15,17 @@ public partial class Dyno
     [Inject]
     public IClientApiService ApiService { get; set; }
 
+    [Inject]
+    public IState<MeasurementState> MeasurementState { get; set; }
+
+    [Inject]
+    public IDispatcher Dispatcher { get; set; }
+
+    public List<MeasurementModel> Measurements => MeasurementState.Value.Measurements;
+
     protected override async Task OnInitializedAsync()
     {
-        var response = await ApiService.GetMeasurementModels();
+        Dispatcher.Dispatch(new InitMeasurementViewAction());
 
         await base.OnInitializedAsync();
     }

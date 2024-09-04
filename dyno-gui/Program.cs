@@ -1,6 +1,8 @@
 using dyno_gui.Client;
 using dyno_gui.Components;
 using dyno_gui.SignalR;
+using Fluxor;
+using Fluxor.Blazor.Web.ReduxDevTools;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,13 @@ builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddHttpClient("APIClient", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7230/api/");
+});
+
+builder.Services.AddFluxor(options =>
+{
+    options.ScanAssemblies(typeof(Program).Assembly);
+    options.UseRouting();
+    options.UseReduxDevTools(); // todo disable on debug
 });
 
 var app = builder.Build();
