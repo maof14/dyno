@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using Repository;
 using ViewModels;
@@ -19,7 +20,7 @@ public class MeasurementController : ControllerBase
     }
 
     // GET: api/<MeasurementController>
-    [HttpGet]
+    [HttpGet(Routes.Measurements)]
     public List<MeasurementModel> Get()
     {
         // Add converters?
@@ -28,7 +29,7 @@ public class MeasurementController : ControllerBase
     }
 
     // GET api/<MeasurementController>/5
-    [HttpGet("{id}")]
+    [HttpGet($"{Routes.Measurements}/{{id}}")]
     public MeasurementModel Get(Guid id)
     {
         var measurement = _measurementRepository.Get(id);

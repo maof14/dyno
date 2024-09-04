@@ -1,3 +1,4 @@
+using dyno_gui.Client;
 using dyno_gui.Components;
 using dyno_gui.SignalR;
 
@@ -10,6 +11,11 @@ builder.Services.AddRazorComponents()
 builder.Services.AddTransient<IHubClient, HubClient>();
 
 builder.Services.AddSignalR();
+
+builder.Services.AddHttpClient("APIClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7230/api");
+});
 
 var app = builder.Build();
 
