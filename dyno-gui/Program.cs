@@ -12,9 +12,11 @@ builder.Services.AddTransient<IHubClient, HubClient>();
 
 builder.Services.AddSignalR();
 
+builder.Services.AddTransient<IClientApiService, ClientApiService>();
+
 builder.Services.AddHttpClient("APIClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7230/api");
+    client.BaseAddress = new Uri("https://localhost:7230/api/");
 });
 
 var app = builder.Build();

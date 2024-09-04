@@ -8,7 +8,7 @@ using ViewModels;
 
 namespace dyno_api.Controllers;
 
-[Route("api/[controller]")]
+[Route($"api/{Routes.Measurements}")]
 [ApiController]
 public class MeasurementController : ControllerBase
 {
@@ -20,7 +20,7 @@ public class MeasurementController : ControllerBase
     }
 
     // GET: api/<MeasurementController>
-    [HttpGet(Routes.Measurements)]
+    [HttpGet]
     public List<MeasurementModel> Get()
     {
         // Add converters?
@@ -29,7 +29,7 @@ public class MeasurementController : ControllerBase
     }
 
     // GET api/<MeasurementController>/5
-    [HttpGet($"{Routes.Measurements}/{{id}}")]
+    [HttpGet("{id}")]
     public MeasurementModel Get(Guid id)
     {
         var measurement = _measurementRepository.Get(id);

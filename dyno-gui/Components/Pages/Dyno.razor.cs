@@ -1,19 +1,29 @@
+using dyno_gui.Client;
 using dyno_gui.SignalR;
 using Microsoft.AspNetCore.Components;
 
-namespace dyno_gui.Components.Pages
+namespace dyno_gui.Components.Pages;
+
+public partial class Dyno
 {
-    public partial class Dyno
+    [Inject]
+    public IHubClient HubClient { get; set; }
+
+    [Inject]
+    public IClientApiService ApiService { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
-        [Inject]
-        public IHubClient HubClient { get; set; }
+        var response = await ApiService.GetMeasurementModels();
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-                await HubClient.ConnectAsync();
+        await base.OnInitializedAsync();
+    }
 
-            await base.OnAfterRenderAsync(firstRender);
-        }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await HubClient.ConnectAsync();
+
+        await base.OnAfterRenderAsync(firstRender);
     }
 }
