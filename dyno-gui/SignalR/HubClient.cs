@@ -2,7 +2,7 @@
 using Infrastructure;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace dyno_gui.SignalR;
+namespace SignalR;
 
 public interface IHubClient : IAsyncDisposable
 {

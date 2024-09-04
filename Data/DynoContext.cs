@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
 
-namespace Repository;
+namespace Data;
 
 public class DynoContext : DbContext
 {

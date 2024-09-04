@@ -1,7 +1,7 @@
 ﻿using Common;
 using ViewModels;
 
-namespace dyno_gui.Client;
+namespace Client;
 
 public interface IClientApiService
 {

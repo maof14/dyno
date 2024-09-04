@@ -1,7 +1,7 @@
-﻿using dyno_gui.Client;
+﻿using Client;
 using Fluxor;
 
-namespace dyno_gui.Store.Measurements;
+namespace Store.Measurements;
 
 public class MeasurementEffect
 {

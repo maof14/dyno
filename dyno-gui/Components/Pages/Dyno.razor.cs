@@ -1,8 +1,8 @@
-using dyno_gui.Client;
-using dyno_gui.SignalR;
-using dyno_gui.Store.Measurements;
+using Client;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
+using SignalR;
+using Store.Measurements;
 using ViewModels;
 
 namespace dyno_gui.Components.Pages;

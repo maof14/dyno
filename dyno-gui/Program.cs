@@ -1,8 +1,8 @@
-using dyno_gui.Client;
+using Client;
 using dyno_gui.Components;
-using dyno_gui.SignalR;
 using Fluxor;
 using Fluxor.Blazor.Web.ReduxDevTools;
+using SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 

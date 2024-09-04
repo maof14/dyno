@@ -1,6 +1,6 @@
 ﻿using ViewModels;
 
-namespace dyno_gui.Store.Measurements;
+namespace Store.Measurements;
 
 public class InitMeasurementViewAction
 {
