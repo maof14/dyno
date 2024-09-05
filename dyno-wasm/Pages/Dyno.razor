@@ -8,6 +8,15 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<p>Jag bara ryar</p>
+<MudTable Items="@Measurements" Hover="true">
+    <HeaderContent>
+        <MudTh>
+            Id
+        </MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+    </RowTemplate>
+</MudTable>
 
 

@@ -4,6 +4,7 @@ using Fluxor;
 using Fluxor.Blazor.Web.ReduxDevTools;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 using SignalR;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -16,6 +17,8 @@ builder.Services.AddFluxor(options =>
     options.UseRouting();
     options.UseReduxDevTools();
 });
+
+builder.Services.AddMudServices();
 
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddTransient<IHubClient, HubClient>();
