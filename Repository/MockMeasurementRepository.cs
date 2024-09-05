@@ -40,7 +40,9 @@ public class MockMeasurementRepository : IRepository<Measurement>
 
     public List<Measurement> GetAll()
     {
-        return _measurements.ToList();
+        return _measurements
+            .OrderByDescending(x => x.DateTime)
+            .ToList();
     }
 }
 
