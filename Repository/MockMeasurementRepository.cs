@@ -9,19 +9,28 @@ public class MockMeasurementRepository : IRepository<Measurement>
 
     public MockMeasurementRepository()
     {
-        var measurements = new List<Measurement>()
-        {
-            new Measurement() { 
-                Id = Guid.NewGuid(),
-                DateTime = DateTimeOffset.Now,
-                MeasurementResults = new List<MeasurementResult>
-                {
-                    new MeasurementResult { Id = Guid.NewGuid(), DataPoint = 5, DateTimeRecorded = DateTime.UtcNow }
-                }
-            } 
-        };
+        var rnd = new Random();
 
-        _measurements.AddRange(measurements);          
+        List<Measurement> measurements = GenerateMeasurements(rnd);
+
+        _measurements.AddRange(measurements);
+    }
+
+    private static List<Measurement> GenerateMeasurements(Random rnd)
+    {
+        return Enumerable.Range(1, 50).Select(x => new Measurement()
+        {
+            Id = Guid.NewGuid(),
+            DateTime = DateTimeOffset.Now,
+            MeasurementResults = GenerateMeasurementResults(rnd)
+        }).ToList();
+    }
+
+    private static List<MeasurementResult> GenerateMeasurementResults(Random rnd)
+    {
+        return Enumerable.Range(1, 100)
+                         .Select(x => new MeasurementResult { Id = Guid.NewGuid(), DataPoint = rnd.Next(1, 100), DateTimeRecorded = DateTime.UtcNow })
+                         .ToList();
     }
 
     public Measurement Get(Guid id)
