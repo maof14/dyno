@@ -2,6 +2,12 @@
 
 namespace Repository;
 
+public interface IRepository<T>
+{
+    T Get(Guid id);
+    List<T> GetAll();
+}
+
 public class MockMeasurementRepository : IRepository<Measurement>
 {
     // Todo implement with EF
@@ -16,6 +22,17 @@ public class MockMeasurementRepository : IRepository<Measurement>
         _measurements.AddRange(measurements);
     }
 
+    public Measurement Get(Guid id)
+    {
+        return _measurements.Where(x => x.Id == id).First();
+    }
+
+    public List<Measurement> GetAll()
+    {
+        return _measurements
+            .OrderByDescending(x => x.DateTime)
+            .ToList();
+    }
     private static List<Measurement> GenerateMeasurements(Random rnd)
     {
         return Enumerable.Range(1, 50).Select(x => new Measurement()
@@ -32,22 +49,7 @@ public class MockMeasurementRepository : IRepository<Measurement>
                          .Select(x => new MeasurementResult { Id = Guid.NewGuid(), DataPoint = rnd.Next(1, 100), DateTimeRecorded = DateTime.UtcNow })
                          .ToList();
     }
-
-    public Measurement Get(Guid id)
-    {
-        return _measurements.Where(x => x.Id == id).First();
-    }
-
-    public List<Measurement> GetAll()
-    {
-        return _measurements
-            .OrderByDescending(x => x.DateTime)
-            .ToList();
-    }
 }
 
-public interface IRepository<T> 
-{
-    T Get(Guid id);
-    List<T> GetAll();
-}
+
+
