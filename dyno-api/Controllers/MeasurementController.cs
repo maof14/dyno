@@ -25,7 +25,7 @@ public class MeasurementController : ControllerBase
     {
         // Add converters?
         var measurements = _measurementRepository.GetAll();
-        return measurements.Select(x => new MeasurementModel(id: x.Id, measurementResults: x.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, datapoint: y.DataPoint, dateTimeRecorded: y.DateTimeRecorded)).ToList())).ToList();
+        return measurements.Select(x => new MeasurementModel(id: x.Id, dateTime: x.DateTime, measurementResults: x.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, datapoint: y.DataPoint, dateTimeRecorded: y.DateTimeRecorded)).ToList())).ToList();
     }
 
     // GET api/<MeasurementController>/5
@@ -34,7 +34,7 @@ public class MeasurementController : ControllerBase
     {
         var measurement = _measurementRepository.Get(id);
 
-        return new MeasurementModel(id: measurement.Id, measurementResults: measurement.MeasurementResults.Select(x => new MeasurementResultModel(id: x.Id, datapoint: x.DataPoint, dateTimeRecorded: x.DateTimeRecorded)).ToList());
+        return new MeasurementModel(id: measurement.Id, dateTime: measurement.DateTime, measurementResults: measurement.MeasurementResults.Select(x => new MeasurementResultModel(id: x.Id, datapoint: x.DataPoint, dateTimeRecorded: x.DateTimeRecorded)).ToList());
     }
 
     // POST api/<MeasurementController>

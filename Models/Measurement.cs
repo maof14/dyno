@@ -4,5 +4,6 @@
     {
         public Guid Id { get; set; }
         public List<MeasurementResult> MeasurementResults { get; set; }
+        public DateTimeOffset DateTime { get; set; }
     }
 }

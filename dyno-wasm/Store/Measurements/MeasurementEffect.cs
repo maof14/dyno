@@ -15,7 +15,17 @@ public class MeasurementEffect
     [EffectMethod(typeof(InitMeasurementViewAction))]
     public async Task OnInitMeasurementViewAction(IDispatcher dispatcher)
     {
-        var result = await _clientApiService.GetMeasurementModels();
-        dispatcher.Dispatch(new UpdateMeasurementsAction() { Measurements = result });
+        try
+        {
+            dispatcher.Dispatch(new SetMeasurementsLoadingAction() { IsLoading = true });
+            var result = await _clientApiService.GetMeasurementModels();
+            dispatcher.Dispatch(new UpdateMeasurementsAction() { Measurements = result });
+        }
+        catch (Exception)
+        {
+            // Display toast or something
+        }
+
+        dispatcher.Dispatch(new SetMeasurementsLoadingAction() { IsLoading = false });
     }
 }

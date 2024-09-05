@@ -12,4 +12,13 @@ public class MeasurementReducer
             Measurements = action.Measurements,
         };
     }
+
+    [ReducerMethod]
+    public static MeasurementState OnSetMeasurementLoadingAction(MeasurementState state, SetMeasurementsLoadingAction action)
+    {
+        return state with
+        {
+            IsLoading = action.IsLoading,
+        };
+    }
 }

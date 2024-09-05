@@ -11,8 +11,10 @@ public class MockMeasurementRepository : IRepository<Measurement>
     {
         var measurements = new List<Measurement>()
         {
-            new Measurement() { Id = Guid.NewGuid() ,
-            MeasurementResults = new List<MeasurementResult>
+            new Measurement() { 
+                Id = Guid.NewGuid(),
+                DateTime = DateTimeOffset.Now,
+                MeasurementResults = new List<MeasurementResult>
                 {
                     new MeasurementResult { Id = Guid.NewGuid(), DataPoint = 5, DateTimeRecorded = DateTime.UtcNow }
                 }
