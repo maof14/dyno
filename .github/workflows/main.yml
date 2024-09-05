@@ -1,0 +1,30 @@
+name: Deploy to Raspberry Pi
+
+on:
+  push:
+    branches:
+      - master  # Körs endast när det pushas till main-grenen
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Steg 1: Checka ut koden från repo
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      # Steg 2: Använd SSH för att ansluta till Raspberry Pi
+      - name: Deploy to Raspberry Pi
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SSH_HOST }}  # Din Raspberry Pi:s IP-adress
+          username: ${{ secrets.SSH_USER }}  # SSH-användarnamn
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Den privata SSH-nyckeln
+          port: ${{ secrets.SSH_PORT }}  # (valfritt) standard är 22
+          script: |
+            cd /home/pi/apps/dyno  # Ange den korrekta sökvägen till din applikation
+            git pull origin master  # Hämta senaste koden
+            dotnet build
+            dotnet run dyno-server.csproj
+
