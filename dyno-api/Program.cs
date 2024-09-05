@@ -12,6 +12,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IRepository<Measurement>, MockMeasurementRepository>();
 
+builder.Services.AddCors(builder =>
+{
+    builder.AddDefaultPolicy(o =>
+        o.WithOrigins("https://localhost:7093")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+    );
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,6 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 

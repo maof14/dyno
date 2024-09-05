@@ -26,9 +26,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{DB2071A5-85A1-4CFB-8A18-515A732B803C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{DB2071A5-85A1-4CFB-8A18-515A732B803C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{61DD3896-70F4-46FF-A257-39765B18C495}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{61DD3896-70F4-46FF-A257-39765B18C495}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dyno-wasm", "dyno-wasm\dyno-wasm.csproj", "{B137E7A5-7585-43C0-AEBA-587F53457E88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{61DD3896-70F4-46FF-A257-39765B18C495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61DD3896-70F4-46FF-A257-39765B18C495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61DD3896-70F4-46FF-A257-39765B18C495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
