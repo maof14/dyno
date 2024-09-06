@@ -1,4 +1,4 @@
-using Client;
+using Common;
 using dyno_wasm;
 using Fluxor;
 using Fluxor.Blazor.Web.ReduxDevTools;

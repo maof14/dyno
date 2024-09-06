@@ -1,8 +1,7 @@
-﻿using Common;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using ViewModels;
 
-namespace Client;
+namespace Common;
 
 public interface IClientApiService
 {
