@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <Import Project="../dyno.targets" />
+  <Import Project="../../dyno.targets" />
 	
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

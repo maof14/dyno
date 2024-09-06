@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-  <Import Project="../dyno.targets" />
+  <Import Project="../../dyno.targets" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
