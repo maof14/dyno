@@ -43,6 +43,8 @@ public class HubClient : IHubClient
     {
         await _hubConnection.StopAsync();
         await _hubConnection.DisposeAsync();
+
+        GC.SuppressFinalize(this);
     }
 
     public async Task SendMessage(string methodName)

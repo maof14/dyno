@@ -29,7 +29,7 @@ public partial class Dyno : IAsyncDisposable
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender)
+        if (firstRender)
         {
             await HubClient.ConnectAsync();
         }
