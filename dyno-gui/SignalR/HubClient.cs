@@ -1,5 +1,5 @@
-﻿using Flurl;
-using Infrastructure;
+﻿using Common;
+using Flurl;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace SignalR;
@@ -25,7 +25,7 @@ public class HubClient : IHubClient
             .WithUrl(url.AppendPathSegment("/dynohub"))
             .Build();
 
-        _hubConnection.On(SignalRConstants.MeasurementCompleted, () =>
+        _hubConnection.On(SignalRMethods.MeasurementCompleted, () =>
         {
             // En mätning är klar, visa en toast.
         });

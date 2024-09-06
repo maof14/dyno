@@ -8,9 +8,7 @@ public interface IHubClient : IAsyncDisposable
 {
     Task ConnectAsync();
     Task DisconnectAsync();
-
     Task SendMessage();
-
 }
 
 

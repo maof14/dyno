@@ -1,9 +1,7 @@
 using dyno_api;
 using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.Extensions.Options;
 using Models;
 using Repository;
-using System.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
 
