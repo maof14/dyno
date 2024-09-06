@@ -2,5 +2,5 @@
 
 public class SignalRMethods
 {
-    public const string Ree = nameof(Ree);
+    public const string MeasurementCompleted = nameof(MeasurementCompleted);
 }
