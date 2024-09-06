@@ -15,8 +15,7 @@ public class DynoHub : Hub
 
     public async Task Test()
     {
-        Console.WriteLine("REE");
-        await Task.CompletedTask;
+        await _monitorService.Test();
     }
 
     public async Task MeasurementRequested()
