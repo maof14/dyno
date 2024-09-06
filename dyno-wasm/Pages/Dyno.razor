@@ -1,5 +1,6 @@
 ﻿@page "/dyno"
 @using Fluxor.Blazor.Web.Components
+@using MudBlazor
 @inherits FluxorComponent
 
 <PageTitle>Dyno</PageTitle>
@@ -7,6 +8,8 @@
 <h1>Weather</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
+
+<MudButton OnClick="TestConnection">Click it</MudButton>
 
 <MudTable Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading">
     <HeaderContent>

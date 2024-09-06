@@ -13,6 +13,12 @@ public class DynoHub : Hub
         _monitorService = monitorService;
     }
 
+    public async Task Test()
+    {
+        Console.WriteLine("REE");
+        await Task.CompletedTask;
+    }
+
     public async Task MeasurementRequested()
     {
         _monitorService.Initialize();

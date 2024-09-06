@@ -8,7 +8,7 @@ public interface IHubClient : IAsyncDisposable
 {
     Task ConnectAsync();
     Task DisconnectAsync();
-    Task SendMessage();
+    Task SendMessage(string methodName);
 }
 
 
@@ -25,7 +25,7 @@ public class HubClient : IHubClient
 
         _hubConnection.On(SignalRMethods.MeasurementCompleted, () =>
         {
-            // En mätning är klar, visa en toast.
+            // En mätning är klar, visa en toast och återkoppla till klient. 
         });
     }
 
@@ -45,8 +45,8 @@ public class HubClient : IHubClient
         await _hubConnection.DisposeAsync();
     }
 
-    public async Task SendMessage()
+    public async Task SendMessage(string methodName)
     {
-        await _hubConnection.InvokeAsync(string.Empty);
+        await _hubConnection.InvokeAsync(methodName);
     }
 }
