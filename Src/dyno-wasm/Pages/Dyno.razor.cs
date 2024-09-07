@@ -1,6 +1,7 @@
 using Common;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using SignalR;
 using Store.Measurements;
 using ViewModels;
@@ -14,6 +15,9 @@ public partial class Dyno : IAsyncDisposable
 
     [Inject]
     public IState<MeasurementState> MeasurementState { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public IHubClient HubClient { get; set; }
@@ -45,5 +49,11 @@ public partial class Dyno : IAsyncDisposable
     public async new Task DisposeAsync()
     {
         await HubClient.DisposeAsync();
+    }
+
+    private void HandleRowClick(TableRowClickEventArgs<MeasurementModel> tableRowClickEventArgs)
+    {
+        var a = tableRowClickEventArgs.Row.Item as MeasurementModel;
+        NavigationManager.NavigateTo($"/measurement/{a.Id}");
     }
 }

@@ -14,11 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution 
 		dyno.targets = dyno.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Src\Shared", "{DCB91400-669C-4A02-B761-81F580B670C9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DCB91400-669C-4A02-B761-81F580B670C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Src\Repository\Repository.csproj", "{310C4DF2-64C4-452C-86DA-FEE36D299253}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contract", "Src\Contract", "{223E0489-B2D7-4212-8217-14139BDC8D9C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contract", "Contract", "{223E0489-B2D7-4212-8217-14139BDC8D9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Src\Models\Models.csproj", "{4796417D-E4C0-49EF-ADC2-24684F0BCACB}"
 EndProject

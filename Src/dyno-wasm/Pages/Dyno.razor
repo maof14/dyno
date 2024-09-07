@@ -1,6 +1,7 @@
 ﻿@page "/dyno"
 @using Fluxor.Blazor.Web.Components
 @using MudBlazor
+@using ViewModels
 @inherits FluxorComponent
 
 <PageTitle>Dyno</PageTitle>
@@ -11,7 +12,7 @@
 
 <MudButton OnClick="TestConnection">Click it</MudButton>
 
-<MudTable Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading">
+<MudTable T="MeasurementModel" Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading" OnRowClick="HandleRowClick">
     <HeaderContent>
         <MudTh>
             Id
