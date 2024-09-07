@@ -4,6 +4,9 @@ using dyno_server.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Needed in production to not only listen on localhost.. (use real ip)
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
+
 builder.Services.AddSignalR();
 builder.Services.AddTransient<IMonitorService, MockMonitorService>();
 

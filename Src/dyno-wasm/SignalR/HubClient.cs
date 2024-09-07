@@ -18,6 +18,7 @@ public class HubClient : IHubClient
 
     public HubClient()
     {
+        // var url = "http://raspberrypi:5000"; // Use hostname of dyno-server when running it in production
         var url = "https://localhost:7239"; // Todo make configurable
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(url.AppendPathSegment("/dynohub"))
