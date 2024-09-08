@@ -24,6 +24,10 @@ public partial class DynoDetails
 
     public MeasurementModel Measurement => MeasurementState.Value.Measurements.FirstOrDefault(x => x.Id == Guid.Parse(MeasurementId));
 
+    public override void OnInitialized() {
+        // todo: If Measurement is null, initalize with some store action
 
+        base.OnInitialized();
+    }
 
 }
