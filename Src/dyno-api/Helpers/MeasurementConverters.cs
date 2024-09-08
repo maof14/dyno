@@ -10,7 +10,7 @@ internal static class MeasurementConverters
         return new MeasurementModel(
             id: x.Id,
             dateTime: x.DateTime,
-            measurementResults: x.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, datapoint: y.DataPoint, dateTimeRecorded: y.DateTimeRecorded))
+            measurementResults: x.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, datapoint: y.DataPoint, count: y.Count, dateTimeRecorded: y.DateTimeRecorded))
             .ToList());
     }
 }

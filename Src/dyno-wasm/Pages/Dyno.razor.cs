@@ -56,4 +56,11 @@ public partial class Dyno : IAsyncDisposable
         var a = tableRowClickEventArgs.Row.Item as MeasurementModel;
         NavigationManager.NavigateTo($"/measurement/{a.Id}");
     }
+
+    private void InitializeNewMeasurement()
+    {
+        // Skicka meddelande till signalR att skapa ny measurement. 
+        // Tar emot meddelande, ska då dispatcha att denna är klar
+        // Uppdatera dispatcha då att är färdig, denna komponent får det nya resultatet. Aki hej da. 
+    }
 }

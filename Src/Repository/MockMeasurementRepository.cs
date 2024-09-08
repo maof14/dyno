@@ -45,8 +45,8 @@ public class MockMeasurementRepository : IRepository<Measurement>
 
     private static List<MeasurementResult> GenerateMeasurementResults(Random rnd)
     {
-        return Enumerable.Range(1, 100)
-                         .Select(x => new MeasurementResult { Id = Guid.NewGuid(), DataPoint = rnd.Next(1, 100), DateTimeRecorded = DateTime.UtcNow })
+        return Enumerable.Range(0, 99)
+                         .Select(x => new MeasurementResult { Id = Guid.NewGuid(), DataPoint = rnd.Next(1, 100), Count = x, DateTimeRecorded = DateTime.UtcNow })
                          .ToList();
     }
 }

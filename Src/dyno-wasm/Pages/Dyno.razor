@@ -6,11 +6,12 @@
 
 <PageTitle>Dyno</PageTitle>
 
-<h1>Weather</h1>
+<h1>Measurement result list</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>This list displays all available measurements. Click one to view details.</p>
 
-<MudButton OnClick="TestConnection">Click it</MudButton>
+<MudButton OnClick="TestConnection">Test connection</MudButton>
+<MudButton OnClick="InitializeNewMeasurement">Start new measurement</MudButton>
 
 <MudTable T="MeasurementModel" Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading" OnRowClick="HandleRowClick">
     <HeaderContent>
