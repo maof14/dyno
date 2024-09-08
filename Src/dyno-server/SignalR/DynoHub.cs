@@ -6,11 +6,13 @@ namespace dyno_server.SignalR;
 
 public class DynoHub : Hub
 {
-    private IMonitorService _monitorService;
+    private readonly IMonitorService _monitorService;
+    private readonly IClientApiService _clientApiService;
 
-    public DynoHub(IMonitorService monitorService)
+    public DynoHub(IMonitorService monitorService, IClientApiService clientApiService)
     {
         _monitorService = monitorService;
+        _clientApiService = clientApiService;
     }
 
     public async Task Test()
@@ -28,6 +30,7 @@ public class DynoHub : Hub
         var result = _monitorService.GetResult();
 
         // Ta ut resultatet, skjut in i databas mha repo. 
+        await _clientApiService.CreateMeasurement(result);
         await Clients.Caller.SendAsync(SignalRMethods.MeasurementCompleted);
     }
 }

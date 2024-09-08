@@ -1,5 +1,6 @@
 ﻿using Common;
 using Flurl;
+using Fluxor;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace SignalR;
@@ -16,8 +17,10 @@ public class HubClient : IHubClient
 {
     private HubConnection _hubConnection;
 
-    public HubClient()
+    public HubClient(IDispatcher dispatcher)
     {
+        Dispatcher = dispatcher;
+
         var url = "https://localhost:7239"; // Todo make configurable
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(url.AppendPathSegment("/dynohub"))
@@ -25,9 +28,13 @@ public class HubClient : IHubClient
 
         _hubConnection.On(SignalRMethods.MeasurementCompleted, () =>
         {
-            // En mätning är klar, visa en toast och återkoppla till klient. 
+            // https://mudblazor.com/components/snackbar#usage
+            // Dispatcher.Dispatch(new ToastSuccessAction());
+            // Dispatch to reload state for Measurements...
         });
     }
+
+    public IDispatcher Dispatcher { get; }
 
     public async Task ConnectAsync()
     {

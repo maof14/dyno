@@ -1,17 +1,17 @@
-﻿using dyno_server.Contract;
+﻿using ViewModels;
 
 namespace dyno_server.Service;
 
 public class MockMonitorService : IMonitorService
 {
-    private MonitorResult _result;
+    private MeasurementModel _result;
 
     public void Cleanup()
     {
         return;
     }
 
-    public MonitorResult GetResult()
+    public MeasurementModel GetResult()
     {
         return _result;
     }
@@ -23,20 +23,19 @@ public class MockMonitorService : IMonitorService
 
     public async Task StartMonitoring()
     {
-        _result = new MonitorResult(Guid.NewGuid());
-        for (var i = 0; i < 50; i++)
-        {
-            var rnd = new Random();
-            _result.AddDataPoint(new Result(
-                dataPoint: rnd.Next(1, 50),
-                dateTimeRecorded: DateTimeOffset.UtcNow));
-
+        var rnd = new Random();
+        var tasks = Enumerable.Range(0, 50).Select(async x => {
             await Task.Delay(20);
-        }
+            return new MeasurementResultModel(Guid.NewGuid(), rnd.Next(0, 100), DateTimeOffset.Now, x);
+        }).ToList();
+
+        var result = await Task.WhenAll(tasks);
+
+        _result = new MeasurementModel(id: Guid.NewGuid(), measurementResults: result.ToList(), dateTime: DateTimeOffset.Now);
     }
 
     public void StopMonitoring()
     {
-        return;
+        throw new NotImplementedException("Not implemented yet, only if neoded.");
     }
 }
