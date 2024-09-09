@@ -38,7 +38,7 @@ public class MockMeasurementRepository : IRepository<Measurement>
     }
     private static List<Measurement> GenerateMeasurements(Random rnd)
     {
-        return Enumerable.Range(1, 50).Select(x => new Measurement(
+        return Enumerable.Range(0, 1).Select(x => new Measurement(
             id: Guid.NewGuid(),
             dateTime: DateTimeOffset.Now,
             measurementResults: GenerateMeasurementResults(rnd))).ToList();
@@ -57,7 +57,8 @@ public class MockMeasurementRepository : IRepository<Measurement>
 
     public bool Create(Measurement entity)
     {
-        throw new NotImplementedException();
+        _measurements.Add(entity);
+        return true;
     }
 }
 

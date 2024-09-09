@@ -1,7 +1,9 @@
 ﻿using Common;
+using dyno_wasm.Store.SharedActions;
 using Flurl;
 using Fluxor;
 using Microsoft.AspNetCore.SignalR.Client;
+using Store.Measurements;
 
 namespace SignalR;
 
@@ -28,9 +30,8 @@ public class HubClient : IHubClient
 
         _hubConnection.On(SignalRMethods.MeasurementCompleted, () =>
         {
-            // https://mudblazor.com/components/snackbar#usage
-            // Dispatcher.Dispatch(new ToastSuccessAction());
-            // Dispatch to reload state for Measurements...
+            Dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Measurement completed." });
+            Dispatcher.Dispatch(new ReloadMeasurementViewAction());
         });
     }
 

@@ -25,11 +25,11 @@ public partial class Dyno : IAsyncDisposable
 
     public List<MeasurementModel> Measurements => MeasurementState.Value.Measurements;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Dispatcher.Dispatch(new InitMeasurementViewAction());
 
-        await base.OnInitializedAsync();
+        base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -58,10 +58,9 @@ public partial class Dyno : IAsyncDisposable
         NavigationManager.NavigateTo($"/measurement/{a.Id}");
     }
 
-    private void InitializeNewMeasurement()
+    private async Task InitializeNewMeasurement()
     {
-        // Skicka meddelande till signalR att skapa ny measurement. 
-        // Tar emot meddelande, ska då dispatcha att denna är klar
-        // Uppdatera dispatcha då att är färdig, denna komponent får det nya resultatet. Aki hej da. 
+        await HubClient.SendMessage(SignalRMethods.MeasurementRequested);
+        Dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Measurement started." });
     }
 }

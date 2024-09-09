@@ -25,7 +25,7 @@ public class MockMonitorService : IMonitorService
     {
         var rnd = new Random();
         var tasks = Enumerable.Range(0, 50).Select(async x => {
-            await Task.Delay(20);
+            await Task.Delay(100);
             return new MeasurementResultModel(Guid.NewGuid(), rnd.Next(0, 100), DateTimeOffset.Now, x);
         }).ToList();
 
