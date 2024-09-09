@@ -29,10 +29,11 @@ public partial class DynoDetails
 
     public List<ChartSeries> Series => new List<ChartSeries>()
     {
-        new ChartSeries { Name = "Datapoint", Data = Measurement.MeasurementResults.Select(x => (double)x.Datapoint).ToArray() }
+        new ChartSeries { Name = "Torque", Data = Measurement.MeasurementResults.Select(x => x.Torque).ToArray() },
+        new ChartSeries { Name = "Horsepower", Data = Measurement.MeasurementResults.Select(x => x.Horsepower).ToArray() }
     };
 
-    public string[] XAxisLabels => Measurement.MeasurementResults.Select(x => x.Count.ToString()).ToArray();
+    public string[] XAxisLabels => Measurement.MeasurementResults.Select((x, i) => i.ToString()).ToArray();
 
     protected override void OnInitialized() {
         // todo: If Measurement is null, initalize it specifically with some store action from this page.

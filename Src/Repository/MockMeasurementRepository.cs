@@ -16,15 +16,6 @@ public class MockMeasurementRepository : IRepository<Measurement>
     // Todo implement with EF
     private List<Measurement> _measurements = new List<Measurement>();
 
-    public MockMeasurementRepository()
-    {
-        var rnd = new Random();
-
-        List<Measurement> measurements = GenerateMeasurements(rnd);
-
-        _measurements.AddRange(measurements);
-    }
-
     public Measurement Get(Guid id)
     {
         return _measurements.Where(x => x.Id == id).First();
@@ -33,25 +24,7 @@ public class MockMeasurementRepository : IRepository<Measurement>
     public List<Measurement> GetAll()
     {
         return _measurements
-            .OrderByDescending(x => x.DateTime)
-            .ToList();
-    }
-    private static List<Measurement> GenerateMeasurements(Random rnd)
-    {
-        return Enumerable.Range(0, 1).Select(x => new Measurement(
-            id: Guid.NewGuid(),
-            dateTime: DateTimeOffset.Now,
-            measurementResults: GenerateMeasurementResults(rnd))).ToList();
-    }
-
-    private static List<MeasurementResult> GenerateMeasurementResults(Random rnd)
-    {
-        return Enumerable.Range(0, MockMeasurementsCount)
-            .Select(x => new MeasurementResult(
-                id: Guid.NewGuid(),
-                datapoint: rnd.Next(1, 100),
-                count: x,
-                dateTimeRecorded: DateTimeOffset.Now))
+            .OrderByDescending(x => x.DateTimeOffset)
             .ToList();
     }
 

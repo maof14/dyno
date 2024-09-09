@@ -9,8 +9,10 @@ internal static class MeasurementConverters
     {
         return new MeasurementModel(
             id: measurement.Id,
-            dateTime: measurement.DateTime,
-            measurementResults: measurement.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, datapoint: y.Datapoint, count: y.Count, dateTimeRecorded: y.DateTimeRecorded))
+            name: measurement.Name,
+            description: measurement.Description,
+            dateTime: measurement.DateTimeOffset,
+            measurementResults: measurement.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, torque: y.Torque, rPM: y.RPM, horsepower: y.Horsepower, dateTimeOffset: y.DateTimeOffset))
             .ToList());
     }
 
@@ -18,8 +20,10 @@ internal static class MeasurementConverters
     {
         return new Measurement(
             id: measurementModel.Id,
-            dateTime: measurementModel.DateTime,
-            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResult(id: y.Id, datapoint: y.Datapoint, count: y.Count, dateTimeRecorded: y.DateTimeRecorded))
+            name: measurementModel.Name,
+            description: measurementModel.Description,
+            dateTimeOffset: measurementModel.DateTime,
+            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResult(id: y.Id, torque: y.Torque, rPM: y.RPM, horsepower: y.Horsepower, dateTimeOffset: y.DateTimeOffset))
             .ToList());
     }
 }

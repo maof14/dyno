@@ -2,16 +2,18 @@
 
 public class MeasurementResult
 {
-    public MeasurementResult(Guid id, int datapoint, int count, DateTimeOffset dateTimeRecorded)
+    public MeasurementResult(Guid id, double torque, double rPM, double horsepower, DateTimeOffset dateTimeOffset)
     {
         Id = id;
-        Count = count;
-        Datapoint = datapoint;
-        DateTimeRecorded = dateTimeRecorded;
+        Torque = torque;
+        RPM = rPM;
+        Horsepower = horsepower;
+        DateTimeOffset = dateTimeOffset;
     }
 
     public Guid Id { get; set; }
-    public int Datapoint { get ; set; }
-    public DateTimeOffset DateTimeRecorded { get; set; }
-    public int Count { get; set; }
+    public double Torque { get; set; }  // Torque in Nm
+    public double RPM { get; set; }     // Rotations Per Minute
+    public double Horsepower { get; set; } // Calculated Horsepower
+    public DateTimeOffset DateTimeOffset { get; set; }
 }

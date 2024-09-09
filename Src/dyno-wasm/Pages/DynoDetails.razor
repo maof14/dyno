@@ -9,9 +9,7 @@
 
 <p>This page shows details of a measurement.</p>
 
-<p>Viewing measurement @Measurement.Id, recorded at @Measurement.DateTime.</p>
-
-@* Visa en liten tabell med info om mätningen. Sedan ett diagram (MudChart.LineChart) med info. Kan även justera viewmodel så att den innehåller mer saker som är lämpliga för en torque-mätning. Aki hej da. *@
+<p>Viewing measurement @Measurement.Name, recorded at @Measurement.DateTime.</p>
 
 <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options" />
 

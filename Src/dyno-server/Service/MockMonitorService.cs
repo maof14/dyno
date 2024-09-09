@@ -1,41 +1,34 @@
-﻿using ViewModels;
+﻿using dyno_server.Simulation;
+using ViewModels;
 
 namespace dyno_server.Service;
 
 public class MockMonitorService : IMonitorService
 {
-    private MeasurementModel _result;
+    private CarEngineSimulator _engineSimulator;
 
     public void Cleanup()
     {
-        return;
+        _engineSimulator = null;
     }
 
     public MeasurementModel GetResult()
     {
-        return _result;
+        return _engineSimulator.GetEngineDataLog();
     }
 
     public void Initialize()
     {
-        return;
+        _engineSimulator = new CarEngineSimulator();
     }
 
     public async Task StartMonitoring()
     {
-        var rnd = new Random();
-        var tasks = Enumerable.Range(0, 50).Select(async x => {
-            await Task.Delay(100);
-            return new MeasurementResultModel(Guid.NewGuid(), rnd.Next(0, 100), DateTimeOffset.Now, x);
-        }).ToList();
-
-        var result = await Task.WhenAll(tasks);
-
-        _result = new MeasurementModel(id: Guid.NewGuid(), measurementResults: result.ToList(), dateTime: DateTimeOffset.Now);
+        await _engineSimulator.RunEngineAsync(10);
     }
 
     public void StopMonitoring()
     {
-        throw new NotImplementedException("Not implemented yet, only if neoded.");
+        _engineSimulator.StopEngine();
     }
 }
