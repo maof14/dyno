@@ -13,9 +13,9 @@ public class MeasurementResultModel
         DateTimeOffset = dateTimeOffset;
     }
 
-    public Guid Id { get; }
-    public double Torque { get; }  // Torque in Nm
-    public double RPM { get; }     // Rotations Per Minute
-    public double Horsepower { get; } // Calculated Horsepower
-    public DateTimeOffset DateTimeOffset { get; }
+    public Guid Id { get; set; }
+    public double Torque { get; set; }  // Torque in Nm
+    public double RPM { get; set; }     // Rotations Per Minute
+    public double Horsepower { get; set; } // Calculated Horsepower
+    public DateTimeOffset DateTimeOffset { get; set; }
 }
