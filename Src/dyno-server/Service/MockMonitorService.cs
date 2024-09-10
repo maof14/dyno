@@ -26,9 +26,4 @@ public class MockMonitorService : IMonitorService
     {
         await _engineSimulator.RunEngineAsync(10);
     }
-
-    public void StopMonitoring()
-    {
-        _engineSimulator.StopEngine();
-    }
 }

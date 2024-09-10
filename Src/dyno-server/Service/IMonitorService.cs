@@ -8,6 +8,5 @@ public interface IMonitorService
     void Cleanup(); // Rensa upp resurser
 
     Task StartMonitoring(); // Starta en monitorering
-    void StopMonitoring();
     MeasurementModel GetResult();
 }
