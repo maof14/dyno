@@ -25,6 +25,8 @@ public partial class Dyno : IAsyncDisposable
 
     public List<MeasurementModel> Measurements => MeasurementState.Value.Measurements;
 
+    private bool _measurementRunning = false;
+
     protected override void OnInitialized()
     {
         Dispatcher.Dispatch(new InitMeasurementViewAction());
@@ -60,7 +62,9 @@ public partial class Dyno : IAsyncDisposable
 
     private async Task InitializeNewMeasurement()
     {
+        _measurementRunning = true;
+        Dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Starting measurement." });
         await HubClient.SendMessage(SignalRMethods.MeasurementRequested);
-        Dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Measurement started." });
+        _measurementRunning = false;
     }
 }

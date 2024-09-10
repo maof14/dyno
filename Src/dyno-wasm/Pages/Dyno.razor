@@ -11,7 +11,7 @@
 <p>This list displays all available measurements. Click one to view details.</p>
 
 <MudButton OnClick="TestConnection">Test connection</MudButton>
-<MudButton OnClick="InitializeNewMeasurement">Start new measurement</MudButton>
+<MudButton OnClick="InitializeNewMeasurement" Disabled="@_measurementRunning">Start new measurement</MudButton>
 
 <MudTable T="MeasurementModel" Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading" OnRowClick="HandleRowClick">
     <HeaderContent>
