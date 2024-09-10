@@ -1,10 +1,10 @@
 using Common;
-using dyno_wasm.Store.SharedActions;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SignalR;
 using Store.Measurements;
+using Store.StartMeasurementDialogState;
 using ViewModels;
 
 namespace dyno_wasm.Pages;
@@ -24,8 +24,6 @@ public partial class Dyno : IAsyncDisposable
     public IHubClient HubClient { get; set; }
 
     public List<MeasurementModel> Measurements => MeasurementState.Value.Measurements;
-
-    private bool _measurementRunning = false;
 
     protected override void OnInitialized()
     {
@@ -60,11 +58,8 @@ public partial class Dyno : IAsyncDisposable
         NavigationManager.NavigateTo($"/measurement/{a.Id}");
     }
 
-    private async Task InitializeNewMeasurement()
+    private void InitializeNewMeasurement()
     {
-        _measurementRunning = true;
-        Dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Starting measurement." });
-        await HubClient.SendMessage(SignalRMethods.MeasurementRequested);
-        _measurementRunning = false;
+        Dispatcher.Dispatch(new InitStartMeasurementDialogAction());
     }
 }

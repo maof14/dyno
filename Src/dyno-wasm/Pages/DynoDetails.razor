@@ -3,13 +3,12 @@
 @using MudBlazor
 @inherits FluxorComponent
 
-<PageTitle>Dyno</PageTitle>
+<PageTitle>Dyno details</PageTitle>
 
-<h1>Measurement details</h1>
+<h1>Measurement: @Measurement.Name</h1>
 
-<p>This page shows details of a measurement.</p>
-
-<p>Viewing measurement @Measurement.Name, recorded at @Measurement.DateTime.</p>
+<h4>Details</h4>
+<p>@Measurement.Description</p>
 
 <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options" />
 

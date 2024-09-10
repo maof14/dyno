@@ -22,11 +22,11 @@ public class DynoHub : Hub
         await Task.CompletedTask;
     }
 
-    public async Task MeasurementRequested()
+    public async Task MeasurementRequested(string name, string description, string duration)
     {
         _monitorService.Initialize();
 
-        await _monitorService.StartMonitoring();
+        await _monitorService.StartMonitoring(name, description, duration);
         
         var result = _monitorService.GetResult();
 

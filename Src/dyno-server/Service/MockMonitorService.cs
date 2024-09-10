@@ -22,8 +22,9 @@ public class MockMonitorService : IMonitorService
         _engineSimulator = new CarEngineSimulator();
     }
 
-    public async Task StartMonitoring()
+    public async Task StartMonitoring(string name, string description, string duration)
     {
-        await _engineSimulator.RunEngineAsync(10);
+        var d = int.TryParse(duration, out var seconds);
+        await _engineSimulator.RunEngineAsync(name, description, seconds);
     }
 }

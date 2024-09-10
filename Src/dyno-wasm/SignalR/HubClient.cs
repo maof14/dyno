@@ -1,17 +1,22 @@
 ﻿using Common;
-using dyno_wasm.Store.SharedActions;
 using Flurl;
 using Fluxor;
 using Microsoft.AspNetCore.SignalR.Client;
 using Store.Measurements;
+using Store.SharedActions;
+using System.Data;
 
 namespace SignalR;
 
 public interface IHubClient : IAsyncDisposable
 {
+    HubConnectionState ConnectionState { get; }
     Task ConnectAsync();
     Task DisconnectAsync();
     Task SendMessage(string methodName);
+    Task SendMessage(string methodName, string arg0);
+    Task SendMessage(string methodName, string arg0, string arg1);
+    Task SendMessage(string methodName, string arg0, string arg1, string arg2);
 }
 
 
@@ -37,15 +42,9 @@ public class HubClient : IHubClient
 
     public IDispatcher Dispatcher { get; }
 
-    public async Task ConnectAsync()
-    {
-        await _hubConnection.StartAsync();
-    }
+    public Task ConnectAsync() => _hubConnection.StartAsync();
 
-    public async Task DisconnectAsync()
-    {
-        await _hubConnection.StopAsync();
-    }
+    public Task DisconnectAsync() => _hubConnection.StopAsync();
 
     public async ValueTask DisposeAsync()
     {
@@ -55,8 +54,13 @@ public class HubClient : IHubClient
         GC.SuppressFinalize(this);
     }
 
-    public async Task SendMessage(string methodName)
-    {
-        await _hubConnection.InvokeAsync(methodName);
-    }
+    public Task SendMessage(string methodName) => _hubConnection.InvokeAsync(methodName);
+
+    public HubConnectionState ConnectionState => _hubConnection.State;
+
+    public Task SendMessage(string methodName, string arg0) => _hubConnection.InvokeAsync(methodName, arg0);
+
+    public Task SendMessage(string methodName, string arg0, string arg1) => _hubConnection.InvokeAsync(methodName, arg0, arg1);
+
+    public Task SendMessage(string methodName, string arg0, string arg1, string arg2) => _hubConnection.InvokeAsync(methodName, arg0, arg1, arg2);
 }

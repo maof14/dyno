@@ -1,4 +1,4 @@
-﻿namespace dyno_wasm.Store.SharedActions;
+﻿namespace Store.SharedActions;
 
 public class ToastSuccessAction
 {

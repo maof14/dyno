@@ -20,3 +20,8 @@ public class ReloadMeasurementViewAction
 {
 
 }
+
+public class SetMeasurementIsRunningAction
+{
+    public bool Running { get; set; }
+}
