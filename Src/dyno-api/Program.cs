@@ -1,3 +1,4 @@
+using Data;
 using dyno_api;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Models;
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IRepository<Measurement>, MockMeasurementRepository>();
+builder.Services.AddScoped<IRepository<Measurement>, MockMeasurementRepository>();
 
 builder.Services.Configure<ApiConfiguration>(builder.Configuration.GetSection(nameof(ApiConfiguration)));
 var settings = builder.Configuration.GetSection(nameof(ApiConfiguration));
@@ -25,6 +26,8 @@ builder.Services.AddCors(builder =>
     builder.AddPolicy("GuiPolicy", BuildCorsPolicy(guiHost));
     builder.AddPolicy("ServerPolicy", BuildCorsPolicy(serverHost));
 });
+
+builder.Services.AddDbContext<DynoDbContext>(); // Har sin egen oncifugration till db. 
 
 var app = builder.Build();
 
