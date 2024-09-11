@@ -31,10 +31,17 @@ public class MockMonitorService : IMonitorService
         controller.OpenPin(pin, PinMode.Output);
         bool ledOn = true;
 
-        for(var i = 0; i < 5; i++)
+        for(var i = 0; i < 10; i++)
         {
             controller.Write(pin, ((ledOn) ? PinValue.High : PinValue.Low));
             await Task.Delay(200);
+            ledOn = !ledOn;
+        }
+
+        for (var i = 0; i < 4; i++)
+        {
+            controller.Write(pin, ((ledOn) ? PinValue.High : PinValue.Low));
+            await Task.Delay(50);
             ledOn = !ledOn;
         }
 
