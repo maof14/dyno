@@ -15,3 +15,13 @@ public class SetMeasurementsLoadingAction
 {
     public bool IsLoading { get; set; }
 }
+
+public class ReloadMeasurementViewAction
+{
+
+}
+
+public class SetMeasurementIsRunningAction
+{
+    public bool Running { get; set; }
+}

@@ -15,6 +15,16 @@ public class MeasurementEffect
     [EffectMethod(typeof(InitMeasurementViewAction))]
     public async Task OnInitMeasurementViewAction(IDispatcher dispatcher)
     {
+        await GetAllMeasurements(dispatcher);
+    }
+
+    [EffectMethod(typeof(ReloadMeasurementViewAction))]
+    public async Task OnReloadMeasurementViewAction(IDispatcher dispatcher)
+    {
+        await GetAllMeasurements(dispatcher);
+    }
+    private async Task GetAllMeasurements(IDispatcher dispatcher)
+    {
         try
         {
             dispatcher.Dispatch(new SetMeasurementsLoadingAction() { IsLoading = true });

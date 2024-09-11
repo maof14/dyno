@@ -1,4 +1,4 @@
-﻿using dyno_server.Contract;
+﻿using ViewModels;
 
 namespace dyno_server.Service;
 
@@ -10,6 +10,5 @@ public interface IMonitorService
     Task Test();
 
     Task StartMonitoring(); // Starta en monitorering
-    void StopMonitoring();
     MonitorResult GetResult();
 }

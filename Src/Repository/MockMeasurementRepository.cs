@@ -6,21 +6,15 @@ public interface IRepository<T>
 {
     T Get(Guid id);
     List<T> GetAll();
+    bool Create(T entity);
 }
 
 public class MockMeasurementRepository : IRepository<Measurement>
 {
+    private const int MockMeasurementsCount = 50;
+
     // Todo implement with EF
     private List<Measurement> _measurements = new List<Measurement>();
-
-    public MockMeasurementRepository()
-    {
-        var rnd = new Random();
-
-        List<Measurement> measurements = GenerateMeasurements(rnd);
-
-        _measurements.AddRange(measurements);
-    }
 
     public Measurement Get(Guid id)
     {
@@ -30,24 +24,14 @@ public class MockMeasurementRepository : IRepository<Measurement>
     public List<Measurement> GetAll()
     {
         return _measurements
-            .OrderByDescending(x => x.DateTime)
+            .OrderByDescending(x => x.DateTimeOffset)
             .ToList();
     }
-    private static List<Measurement> GenerateMeasurements(Random rnd)
-    {
-        return Enumerable.Range(1, 50).Select(x => new Measurement()
-        {
-            Id = Guid.NewGuid(),
-            DateTime = DateTimeOffset.Now,
-            MeasurementResults = GenerateMeasurementResults(rnd)
-        }).ToList();
-    }
 
-    private static List<MeasurementResult> GenerateMeasurementResults(Random rnd)
+    public bool Create(Measurement entity)
     {
-        return Enumerable.Range(1, 100)
-                         .Select(x => new MeasurementResult { Id = Guid.NewGuid(), DataPoint = rnd.Next(1, 100), DateTimeRecorded = DateTime.UtcNow })
-                         .ToList();
+        _measurements.Add(entity);
+        return true;
     }
 }
 

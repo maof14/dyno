@@ -21,4 +21,13 @@ public class MeasurementReducer
             IsLoading = action.IsLoading,
         };
     }
+
+    [ReducerMethod]
+    public static MeasurementState OnSetMeasurementIsRunningAction(MeasurementState state, SetMeasurementIsRunningAction action) 
+    {
+        return state with
+        {
+            Running = action.Running
+        };
+    }
 }

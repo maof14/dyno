@@ -1,0 +1,18 @@
+﻿@page "/measurement/{MeasurementId}"
+@using Fluxor.Blazor.Web.Components
+@using MudBlazor
+@inherits FluxorComponent
+
+<PageTitle>Dyno details</PageTitle>
+
+<h1>Measurement: @Measurement.Name</h1>
+
+<h4>Details</h4>
+<p>@Measurement.Description</p>
+
+<MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options" />
+
+
+
+
+

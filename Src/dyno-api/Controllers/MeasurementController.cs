@@ -22,26 +22,31 @@ public class MeasurementController : ControllerBase
 
     // GET: api/<MeasurementController>
     [HttpGet]
-    public List<MeasurementModel> Get()
+    public ActionResult<List<MeasurementModel>> Get()
     {
         // Add converters?
         var measurements = _measurementRepository.GetAll();
-        return measurements.Select(MeasurementConverters.Convert).ToList();
+        return Ok(measurements.Select(MeasurementConverters.Convert).ToList());
     }
 
     // GET api/<MeasurementController>/5
     [HttpGet("{id}")]
-    public MeasurementModel Get(Guid id)
+    public ActionResult<MeasurementModel> Get(Guid id)
     {
         var measurement = _measurementRepository.Get(id);
-
-        return MeasurementConverters.Convert(measurement);
+        return Ok(MeasurementConverters.Convert(measurement));
     }
 
     // POST api/<MeasurementController>
     [HttpPost]
-    public void Post([FromBody] string value)
+    public ActionResult Post([FromBody] MeasurementModel measurementModel)
     {
+        // Some validation here perhaps. 
+
+        var entity = MeasurementConverters.Convert(measurementModel);
+        var result = _measurementRepository.Create(entity);
+
+        return Ok();
     }
 
     // PUT api/<MeasurementController>/5

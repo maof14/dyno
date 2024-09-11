@@ -1,0 +1,17 @@
+﻿@inherits FluxorComponent
+
+<MudDialog>
+    <TitleContent>
+        Start new measurement
+    </TitleContent>
+    <DialogContent>
+        Measurement parameters
+        <MudTextField Label="Name" @bind-Value="_measurementName"></MudTextField>
+        <MudTextField Lines="3" Label="Description" @bind-Value="_measurementDescription"></MudTextField>
+        <MudTextField Label="Duration" @bind-Value="_duration"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

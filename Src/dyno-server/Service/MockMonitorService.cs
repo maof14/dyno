@@ -1,25 +1,26 @@
-﻿using dyno_server.Contract;
-using System.Device.Gpio;
+﻿using System.Device.Gpio;
+using dyno_server.Simulation;
+using ViewModels;
 
 namespace dyno_server.Service;
 
 public class MockMonitorService : IMonitorService
 {
-    private MonitorResult _result;
+    private CarEngineSimulator _engineSimulator;
 
     public void Cleanup()
     {
-        return;
+        _engineSimulator = null;
     }
 
-    public MonitorResult GetResult()
+    public MeasurementModel GetResult()
     {
-        return _result;
+        return _engineSimulator.GetEngineDataLog();
     }
 
     public void Initialize()
     {
-        return;
+        _engineSimulator = new CarEngineSimulator();
     }
 
     public async Task Test()
@@ -49,22 +50,9 @@ public class MockMonitorService : IMonitorService
         controller.Dispose();
     }
 
-    public async Task StartMonitoring()
+    public async Task StartMonitoring(string name, string description, string duration)
     {
-        _result = new MonitorResult(Guid.NewGuid());
-        for (var i = 0; i < 50; i++)
-        {
-            var rnd = new Random();
-            _result.AddDataPoint(new Result(
-                dataPoint: rnd.Next(1, 50),
-                dateTimeRecorded: DateTimeOffset.UtcNow));
-
-            await Task.Delay(20);
-        }
-    }
-
-    public void StopMonitoring()
-    {
-        return;
+        var d = int.TryParse(duration, out var seconds);
+        await _engineSimulator.RunEngineAsync(name, description, seconds);
     }
 }

@@ -9,7 +9,6 @@ builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 builder.Services.AddSignalR();
 builder.Services.AddTransient<IMonitorService, MockMonitorService>();
-
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 
 builder.Services.AddHttpClient("APIClient", client =>
