@@ -29,10 +29,15 @@ jobs:
     - name: Publish All Projects
       run: |
         for project in $(find ./Src -name "*.csproj"); do
-          echo "Publishing $project"
-          project_name="${project:0:${#project}-7}"
-          echo "Modified project name: $project_name"
-          dotnet publish $project --configuration Release --output ./publish/$(basename $project_name)
+            project_name=$(basename "$project" .csproj)
+        
+            # Check if the project name is one of the ones we want to publish
+            if [[ "$project_name" == "dyno-wasm" || "$project_name" == "dyno-api" || "$project_name" == "dyno-server" ]]; then
+                echo "Publishing $project_name ($project)"
+                dotnet publish "$project" --configuration Release --output ./publish/"$project_name"
+            else
+                echo "Skipping $project_name"
+            fi
         done
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
