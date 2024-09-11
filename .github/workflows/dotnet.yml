@@ -30,7 +30,9 @@ jobs:
       run: |
         for project in $(find ./Src -name "*.csproj"); do
           echo "Publishing $project"
-          dotnet publish $project --configuration Release --output ./publish/$(basename $project)
+          project_name="${project:0:${#project}-7}"
+          echo "Modified project name: $project_name"
+          dotnet publish $project --configuration Release --output ./publish/$(basename $project_name)
         done
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
