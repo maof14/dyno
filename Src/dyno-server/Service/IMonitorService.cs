@@ -9,6 +9,6 @@ public interface IMonitorService
 
     Task Test();
 
-    Task StartMonitoring(); // Starta en monitorering
-    MonitorResult GetResult();
+    Task StartMonitoring(string name, string description, string duration); // Starta en monitorering
+    MeasurementModel GetResult();
 }
