@@ -1,37 +1,58 @@
-﻿using Models;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace Repository;
 
 public interface IRepository<T>
 {
-    T Get(Guid id);
-    List<T> GetAll();
-    bool Create(T entity);
+    Task<T> Get(Guid id);
+    Task<List<T>> GetAll();
+    Task<bool> Create(T entity);
 }
 
 public class MockMeasurementRepository : IRepository<Measurement>
 {
-    private const int MockMeasurementsCount = 50;
+    private readonly DynoDbContext _dbContext;
 
-    // Todo implement with EF
-    private List<Measurement> _measurements = new List<Measurement>();
-
-    public Measurement Get(Guid id)
+    public MockMeasurementRepository(DynoDbContext dbContext)
     {
-        return _measurements.Where(x => x.Id == id).First();
+        _dbContext = dbContext;
     }
 
-    public List<Measurement> GetAll()
+    public async Task<Measurement> Get(Guid id)
     {
-        return _measurements
-            .OrderByDescending(x => x.DateTimeOffset)
-            .ToList();
+        return await _dbContext
+            .Measurements
+            .Include(x => x.MeasurementResults)
+            .FirstAsync(x => x.Id == id);
     }
 
-    public bool Create(Measurement entity)
+    public async Task<List<Measurement>> GetAll()
     {
-        _measurements.Add(entity);
-        return true;
+        return await _dbContext
+            .Measurements
+            .Include(x => x.MeasurementResults)
+            .ToListAsync();
+    }
+
+    public async Task<bool> Create(Measurement entity)
+    {
+        using (var tx = _dbContext.Database.BeginTransaction())
+        {
+            try
+            {
+                await _dbContext.Measurements.AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+                await tx.CommitAsync();
+                return true;
+            }
+            catch (Exception ex) {
+                await tx.RollbackAsync();
+                return false;
+            }
+
+        }
     }
 }
 

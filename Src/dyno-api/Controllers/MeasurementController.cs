@@ -22,29 +22,32 @@ public class MeasurementController : ControllerBase
 
     // GET: api/<MeasurementController>
     [HttpGet]
-    public ActionResult<List<MeasurementModel>> Get()
+    public async Task<ActionResult<List<MeasurementModel>>> Get()
     {
-        // Add converters?
-        var measurements = _measurementRepository.GetAll();
+        var measurements = (await _measurementRepository.GetAll())
+            .OrderByDescending(x => x.DateTimeOffset);
         return Ok(measurements.Select(MeasurementConverters.Convert).ToList());
     }
 
     // GET api/<MeasurementController>/5
     [HttpGet("{id}")]
-    public ActionResult<MeasurementModel> Get(Guid id)
+    public async Task<ActionResult<MeasurementModel>> Get(Guid id)
     {
-        var measurement = _measurementRepository.Get(id);
+        var measurement = await _measurementRepository.Get(id);
         return Ok(MeasurementConverters.Convert(measurement));
     }
 
     // POST api/<MeasurementController>
     [HttpPost]
-    public ActionResult Post([FromBody] MeasurementModel measurementModel)
+    public async Task<ActionResult> Post([FromBody] MeasurementModel measurementModel)
     {
         // Some validation here perhaps. 
 
         var entity = MeasurementConverters.Convert(measurementModel);
-        var result = _measurementRepository.Create(entity);
+        var result = await _measurementRepository.Create(entity);
+
+        if(!result)
+            return BadRequest(result);
 
         return Ok();
     }
