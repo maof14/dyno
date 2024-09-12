@@ -23,7 +23,7 @@ public class DynoDbContext : DbContext
         modelBuilder.Entity<Measurement>()
             .HasMany(x => x.MeasurementResults)
             .WithOne(x => x.Measurement)
-            .HasForeignKey(x => x.Id);
+            .HasForeignKey(x => x.MeasurementId);
 
         modelBuilder.Entity<MeasurementResult>()
             .HasOne(x => x.Measurement);

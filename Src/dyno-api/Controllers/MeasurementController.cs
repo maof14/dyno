@@ -24,8 +24,8 @@ public class MeasurementController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<MeasurementModel>>> Get()
     {
-        // Add converters?
-        var measurements = await _measurementRepository.GetAll();
+        var measurements = (await _measurementRepository.GetAll())
+            .OrderByDescending(x => x.DateTimeOffset);
         return Ok(measurements.Select(MeasurementConverters.Convert).ToList());
     }
 
