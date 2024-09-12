@@ -1,6 +1,7 @@
 using Data;
 using dyno_api;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository;
 
@@ -44,6 +45,12 @@ app.UseCors("ServerPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetService<DynoDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
 
 app.MapControllers();
 
