@@ -2,6 +2,7 @@
 using dyno_api.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,10 +25,10 @@ namespace dyno_api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login([FromBody] LoginModel loginModel)
+        public ActionResult Login([FromBody] Login login)
         {
             // Do something about this
-            if(loginModel.UserName == "user" && loginModel.Password == "password")
+            if(login.UserName == "user" && login.Password == "password")
             {
                 var token = _authHelpers.GenerateJwtToken();
                 return Ok(new { token });
@@ -35,11 +36,5 @@ namespace dyno_api.Controllers
 
             return Unauthorized();
         }
-    }
-
-    public class LoginModel
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
     }
 }
