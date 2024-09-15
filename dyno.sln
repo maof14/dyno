@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Src\Common\Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-wasm", "Src\dyno-wasm\dyno-wasm.csproj", "{B137E7A5-7585-43C0-AEBA-587F53457E88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "UserService\Service.csproj", "{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "UserService\Service.csproj", "{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

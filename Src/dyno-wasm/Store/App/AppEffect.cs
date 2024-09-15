@@ -29,4 +29,13 @@ public class AppEffect
         dispatcher.Dispatch(new SetLoggedInStatusAction() { IsLoggedIn = true });
     }
 
+    [EffectMethod(typeof(DeAuthenticateAction))]
+    public Task OnDeauthenticateAction(IDispatcher dispatcher)
+    {
+        _tokenService.ResetToken();
+
+        dispatcher.Dispatch(new SetLoggedInStatusAction() { IsLoggedIn = false });
+
+        return Task.CompletedTask;
+    }
 }

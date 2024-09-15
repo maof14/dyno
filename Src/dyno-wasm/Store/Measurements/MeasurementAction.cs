@@ -25,3 +25,8 @@ public class SetMeasurementIsRunningAction
 {
     public bool Running { get; set; }
 }
+
+public class ClearMeasurementsAction
+{
+
+}

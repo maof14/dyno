@@ -1,7 +1,6 @@
 ﻿using Fluxor;
-using Store.App;
 
-namespace Store.App_wasm.Store.App;
+namespace Store.App;
 
 public class AppReducer
 {

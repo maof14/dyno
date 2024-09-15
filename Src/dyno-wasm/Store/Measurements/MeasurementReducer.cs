@@ -30,4 +30,13 @@ public class MeasurementReducer
             Running = action.Running
         };
     }
+
+    [ReducerMethod(typeof(ClearMeasurementsAction))]
+    public static MeasurementState OnClearMeasurementsAction(MeasurementState state)
+    {
+        return state with
+        {
+            Measurements = []
+        };
+    }
 }

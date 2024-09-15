@@ -33,9 +33,9 @@ public class AuthController : ControllerBase
     {
         var success = await _userService.Authenticate(login.Username, login.Password);
 
-        if(success)
+        if(success != Guid.Empty)
         {
-            var token = _authHelpers.GenerateJwtToken();
+            var token = _authHelpers.GenerateJwtToken(login.Username);
             return Ok(new { token });
         }
 

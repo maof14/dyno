@@ -6,7 +6,7 @@ namespace Service;
 
 public interface IUserService
 {
-    Task<bool> Authenticate(string username, string password);
+    Task<Guid> Authenticate(string username, string password);
     Task<bool> CreateUser(string username, string password);
 }
 
@@ -20,7 +20,7 @@ public class UserService : IUserService
         _appUserRepo = appUserRepo;
     }
 
-    public async Task<bool> Authenticate(string username, string password)
+    public async Task<Guid> Authenticate(string username, string password)
     {
         _passwordHasher = new PasswordHasher<AppUserEntity>();
 
@@ -28,15 +28,15 @@ public class UserService : IUserService
 
         if (appUser == null)
         {
-            return false;
+            return Guid.Empty;
         }
 
         var passwordCheck = _passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash, password);
 
         if (passwordCheck == PasswordVerificationResult.Success)
-            return true;
+            return appUser.Id;
 
-        return false;
+        return Guid.Empty;
     }
 
     public async Task<bool> CreateUser(string username, string password)

@@ -10,3 +10,5 @@ public class SetLoggedInStatusAction
 {
     public bool IsLoggedIn { get; set; }
 }
+
+public class DeAuthenticateAction { }

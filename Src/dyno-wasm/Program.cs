@@ -2,6 +2,7 @@ using Common;
 using dyno_wasm;
 using Fluxor;
 using Fluxor.Blazor.Web.ReduxDevTools;
+using Helpers;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -24,11 +25,12 @@ builder.Services.AddMudServices();
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddTransient<IHubClient, HubClient>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddTransient<JwtAuthorizationHandler>();
 
 builder.Services.AddHttpClient("APIClient", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7230/api/");
-}); // .AddHttpMessageHandler();... 
+}).AddHttpMessageHandler<JwtAuthorizationHandler>();
 
 builder.Services.AddHttpClient("TokenClient", client =>
 {
