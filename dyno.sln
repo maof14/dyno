@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Src\Common\Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-wasm", "Src\dyno-wasm\dyno-wasm.csproj", "{B137E7A5-7585-43C0-AEBA-587F53457E88}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "UserService\Service.csproj", "{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B137E7A5-7585-43C0-AEBA-587F53457E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A5361A-4EB2-41C6-888B-A9A3FF4A9560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{3AE5FE79-7416-4E8D-B7EB-CF26708FAAE5} = {DCB91400-669C-4A02-B761-81F580B670C9}
 		{DB2071A5-85A1-4CFB-8A18-515A732B803C} = {223E0489-B2D7-4212-8217-14139BDC8D9C}
 		{61DD3896-70F4-46FF-A257-39765B18C495} = {DCB91400-669C-4A02-B761-81F580B670C9}
+		{28A5361A-4EB2-41C6-888B-A9A3FF4A9560} = {DCB91400-669C-4A02-B761-81F580B670C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {256186D7-C4FD-45A3-A3A5-FC7D294ED565}

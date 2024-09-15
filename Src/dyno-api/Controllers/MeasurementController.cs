@@ -1,5 +1,6 @@
 ﻿using Common;
 using dyno_api.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Repository;
@@ -9,13 +10,14 @@ using ViewModels;
 
 namespace dyno_api.Controllers;
 
+[Authorize]
 [Route($"api/{Routes.Measurements}")]
 [ApiController]
 public class MeasurementController : ControllerBase
 {
-    private readonly IRepository<Measurement> _measurementRepository;
+    private readonly IRepository<MeasurementEntity> _measurementRepository;
 
-    public MeasurementController(IRepository<Measurement> measurementRepository)
+    public MeasurementController(IRepository<MeasurementEntity> measurementRepository)
     {
         _measurementRepository = measurementRepository;
     }
@@ -50,17 +52,5 @@ public class MeasurementController : ControllerBase
             return BadRequest(result);
 
         return Ok();
-    }
-
-    // PUT api/<MeasurementController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/<MeasurementController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
     }
 }

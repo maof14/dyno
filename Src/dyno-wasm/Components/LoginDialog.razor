@@ -1,0 +1,15 @@
+﻿@inherits FluxorComponent
+
+<MudDialog>
+    <TitleContent>
+        Log in
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Label="Username" @bind-Value="LoginModel.Username"></MudTextField>
+        <MudTextField Label="Password" @bind-Value="LoginModel.Password" InputType="InputType.Password"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

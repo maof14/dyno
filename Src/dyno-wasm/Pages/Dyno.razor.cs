@@ -3,6 +3,7 @@ using Fluxor;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SignalR;
+using Store.App;
 using Store.Measurements;
 using Store.StartMeasurementDialogState;
 using ViewModels;
@@ -18,6 +19,9 @@ public partial class Dyno : IAsyncDisposable
     public IState<MeasurementState> MeasurementState { get; set; }
 
     [Inject]
+    public IState<AppState> AppState { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
@@ -27,7 +31,10 @@ public partial class Dyno : IAsyncDisposable
 
     protected override void OnInitialized()
     {
-        Dispatcher.Dispatch(new InitMeasurementViewAction());
+        if (AppState.Value.IsLoggedIn)
+        {
+            Dispatcher.Dispatch(new InitMeasurementViewAction());
+        }
 
         base.OnInitialized();
     }
@@ -36,7 +43,10 @@ public partial class Dyno : IAsyncDisposable
     {
         if (firstRender)
         {
-            await HubClient.ConnectAsync();
+            if (AppState.Value.IsLoggedIn)
+            {
+                await HubClient.ConnectAsync();
+            }
         }
 
         await base.OnAfterRenderAsync(firstRender);

@@ -2,6 +2,7 @@ using Fluxor;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SignalR;
+using Store.App;
 using Store.Measurements;
 using ViewModels;
 
@@ -15,6 +16,9 @@ public partial class DynoDetails
 
     [Inject]
     public IState<MeasurementState> MeasurementState { get; set; }
+
+    [Inject]
+    public IState<AppState> AppState { get; set; }
 
     [Inject]
     public IHubClient HubClient { get; set; }

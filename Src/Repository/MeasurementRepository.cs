@@ -4,23 +4,16 @@ using Models;
 
 namespace Repository;
 
-public interface IRepository<T>
-{
-    Task<T> Get(Guid id);
-    Task<List<T>> GetAll();
-    Task<bool> Create(T entity);
-}
-
-public class MockMeasurementRepository : IRepository<Measurement>
+public class MeasurementRepository : IRepository<MeasurementEntity>
 {
     private readonly DynoDbContext _dbContext;
 
-    public MockMeasurementRepository(DynoDbContext dbContext)
+    public MeasurementRepository(DynoDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<Measurement> Get(Guid id)
+    public async Task<MeasurementEntity> Get(Guid id)
     {
         return await _dbContext
             .Measurements
@@ -28,7 +21,7 @@ public class MockMeasurementRepository : IRepository<Measurement>
             .FirstAsync(x => x.Id == id);
     }
 
-    public async Task<List<Measurement>> GetAll()
+    public async Task<List<MeasurementEntity>> GetAll()
     {
         return await _dbContext
             .Measurements
@@ -36,7 +29,7 @@ public class MockMeasurementRepository : IRepository<Measurement>
             .ToListAsync();
     }
 
-    public async Task<bool> Create(Measurement entity)
+    public async Task<bool> Create(MeasurementEntity entity)
     {
         using (var tx = _dbContext.Database.BeginTransaction())
         {
@@ -51,7 +44,6 @@ public class MockMeasurementRepository : IRepository<Measurement>
                 await tx.RollbackAsync();
                 return false;
             }
-
         }
     }
 }

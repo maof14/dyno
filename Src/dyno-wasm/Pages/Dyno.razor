@@ -8,28 +8,36 @@
 
 <h1>Measurement result list</h1>
 
-<p>This list displays all available measurements. Click one to view details.</p>
+@if(AppState.Value.IsLoggedIn)
+{
+    <p>This list displays all available measurements. Click one to view details, or generate a new.</p>
 
-<MudButton OnClick="TestConnection">Test connection</MudButton>
-<MudButton OnClick="InitializeNewMeasurement" Disabled="@MeasurementState.Value.Running">Start new measurement</MudButton>
+    <MudButton OnClick="TestConnection">Test connection</MudButton>
+    <MudButton OnClick="InitializeNewMeasurement" Disabled="@MeasurementState.Value.Running">Start new measurement</MudButton>
 
-<MudTable T="MeasurementModel" Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading" OnRowClick="HandleRowClick">
-    <HeaderContent>
-        <MudTh>
-            Name
-        </MudTh>
-        <MudTh>
-            Datapoints
-        </MudTh>
-        <MudTh>
-            Date recorded
-        </MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="Name">@context.Name</MudTd>
-        <MudTd DataLabel="Datapoints count">@context.MeasurementResults.Count</MudTd>
-        <MudTd DataLabel="Date">@context.DateTime</MudTd>
-    </RowTemplate>
-</MudTable>
+    <MudTable T="MeasurementModel" Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading" OnRowClick="HandleRowClick">
+        <HeaderContent>
+            <MudTh>
+                Name
+            </MudTh>
+            <MudTh>
+                Datapoints
+            </MudTh>
+            <MudTh>
+                Date recorded
+            </MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Datapoints count">@context.MeasurementResults.Count</MudTd>
+            <MudTd DataLabel="Date">@context.DateTime</MudTd>
+        </RowTemplate>
+    </MudTable>
+} 
+else
+{
+    <p>You need to be logged in to view this content.</p>
+}
+
 
 
