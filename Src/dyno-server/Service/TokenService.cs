@@ -1,9 +1,7 @@
 ﻿using Common;
-using System.Net.Http.Json;
-using System.Text.Json;
 using ViewModels;
 
-namespace Service;
+namespace dyno_server.Service;
 
 public class TokenService : ITokenService
 {
@@ -24,15 +22,9 @@ public class TokenService : ITokenService
             Password = password
         });
 
-        if (token.IsSuccessStatusCode)
-        {
-            var body = await token.Content.ReadFromJsonAsync<TokenModel>();
-            Token = body.Token;
-        }
-        else 
-        { 
-            throw new Exception("Failed to login."); 
-        }
+        var body = await token.Content.ReadFromJsonAsync<TokenModel>();
+
+        Token = body.Token;
     }
 
     public void ResetToken()
