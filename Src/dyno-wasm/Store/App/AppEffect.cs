@@ -18,7 +18,7 @@ public class AppEffect
     {
         try
         {
-            var response = await _tokenService.GetTokenAsync();
+            await _tokenService.GetTokenAsync(action.Username, action.Password);
         }
         catch (Exception)
         {

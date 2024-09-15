@@ -26,6 +26,11 @@ builder.Services.AddTransient<IHubClient, HubClient>();
 builder.Services.AddHttpClient("APIClient", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7230/api/");
+}); // .AddHttpMessageHandler();... 
+
+builder.Services.AddHttpClient("TokenClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7230/api/");
 });
 
 await builder.Build().RunAsync();

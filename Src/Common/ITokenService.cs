@@ -2,6 +2,6 @@
 
 public interface ITokenService
 {
-    Task<string> GetTokenAsync();
+    Task GetTokenAsync(string username, string password);
     string Token { get; }
 }
