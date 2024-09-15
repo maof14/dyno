@@ -6,7 +6,7 @@ namespace Store.App_wasm.Store.App;
 public class AppReducer
 {
     [ReducerMethod]
-    public static AppState OnSetLoggedInStatusAction(SetLoggedInStatusAction action, AppState state)
+    public static AppState OnSetLoggedInStatusAction(AppState state, SetLoggedInStatusAction action)
     {
         return state with
         {
