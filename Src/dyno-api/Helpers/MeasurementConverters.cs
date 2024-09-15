@@ -5,7 +5,7 @@ namespace dyno_api.Helpers;
 
 internal static class MeasurementConverters
 {
-    internal static MeasurementModel Convert(Measurement measurement)
+    internal static MeasurementModel Convert(MeasurementEntity measurement)
     {
         return new MeasurementModel(
             id: measurement.Id,
@@ -16,14 +16,14 @@ internal static class MeasurementConverters
             .ToList());
     }
 
-    internal static Measurement Convert(MeasurementModel measurementModel)
+    internal static MeasurementEntity Convert(MeasurementModel measurementModel)
     {
-        return new Measurement(
+        return new MeasurementEntity(
             id: measurementModel.Id,
             name: measurementModel.Name,
             description: measurementModel.Description,
             dateTimeOffset: measurementModel.DateTime,
-            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResult(id: y.Id, torque: y.Torque, rPM: y.RPM, horsepower: y.Horsepower, dateTimeOffset: y.DateTimeOffset))
+            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResultEntity(id: y.Id, torque: y.Torque, rPM: y.RPM, horsepower: y.Horsepower, dateTimeOffset: y.DateTimeOffset))
             .ToList());
     }
 }

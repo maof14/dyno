@@ -5,9 +5,11 @@ namespace Data;
 
 public class DynoDbContext : DbContext
 {
-    public DbSet<Measurement> Measurements { get; set; }
+    public DbSet<MeasurementEntity> Measurements { get; set; }
 
-    public DbSet<MeasurementResult> MeasurementResults { get; set; }
+    public DbSet<MeasurementResultEntity> MeasurementResults { get; set; }
+
+    public DbSet<AppUserEntity> AppUsers { get; set; }
 
     public string DbPath { get; }
 
@@ -20,12 +22,12 @@ public class DynoDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Measurement>()
+        modelBuilder.Entity<MeasurementEntity>()
             .HasMany(x => x.MeasurementResults)
             .WithOne(x => x.Measurement)
             .HasForeignKey(x => x.MeasurementId);
 
-        modelBuilder.Entity<MeasurementResult>()
+        modelBuilder.Entity<MeasurementResultEntity>()
             .HasOne(x => x.Measurement);
     }
 

@@ -11,7 +11,7 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using dyno_api.Helpers;
 using System.Reflection;
-
+using Service;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -41,8 +41,10 @@ builder.Services.AddSwaggerGen(o =>
     });
 });
 
-builder.Services.AddScoped<IRepository<Measurement>, MockMeasurementRepository>();
+builder.Services.AddScoped<IRepository<MeasurementEntity>, MeasurementRepository>();
 builder.Services.AddTransient<IAuthHelpers, AuthHelpers>();
+builder.Services.AddScoped<IRepository<AppUserEntity>, AppUserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.Configure<ApiConfiguration>(builder.Configuration.GetSection(nameof(ApiConfiguration)));
 var settings = builder.Configuration.GetSection(nameof(ApiConfiguration)).Get<ApiConfiguration>();

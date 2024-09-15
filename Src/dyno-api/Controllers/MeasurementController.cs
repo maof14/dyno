@@ -15,9 +15,9 @@ namespace dyno_api.Controllers;
 [ApiController]
 public class MeasurementController : ControllerBase
 {
-    private readonly IRepository<Measurement> _measurementRepository;
+    private readonly IRepository<MeasurementEntity> _measurementRepository;
 
-    public MeasurementController(IRepository<Measurement> measurementRepository)
+    public MeasurementController(IRepository<MeasurementEntity> measurementRepository)
     {
         _measurementRepository = measurementRepository;
     }
