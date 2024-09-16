@@ -57,13 +57,11 @@ builder.Services.AddCors(builder =>
 
 builder.Services.AddDbContext<DynoDbContext>(); // Har sin egen oncifugration till db. 
 
-var clientSecretCredential = new ClientSecretCredential(
-    tenantId: settings.TenantId,
-    clientId: settings.ClientId,
-    clientSecret: await File.ReadAllTextAsync($"{AppDomain.CurrentDomain.BaseDirectory}/Data/secret.txt")
-);
+#if DEBUG
+    Environment.SetEnvironmentVariable("AZURE_CLIENT_SECRET", builder.Configuration.GetValue<string>("ClientSecret"));
+#endif
 
-builder.Configuration.AddAzureKeyVault(new Uri(settings.VaultUrl), clientSecretCredential);
+builder.Configuration.AddAzureKeyVault(new Uri(settings.VaultUrl), new DefaultAzureCredential());
 
 builder.Services.AddAuthentication(options =>
 {
