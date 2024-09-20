@@ -1,6 +1,7 @@
 using Common;
 using dyno_server.Configuration;
 using dyno_server.Service;
+using dyno_server.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddTransient<IMonitorService, MockMonitorService>();
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddTransient<JwtAuthorizationHandler>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<IHubClient, HubClient>();
 
 builder.Services.Configure<AppConfiguration>(builder.Configuration.GetSection(nameof(AppConfiguration)));
 var settings = builder.Configuration.GetSection(nameof(AppConfiguration)).Get<AppConfiguration>();
@@ -26,12 +28,12 @@ builder.Services.AddHttpClient("TokenClient", client =>
 
 builder.Services.AddCors(builder =>
 {
-    builder.AddDefaultPolicy(o =>
-    {
-        o.WithOrigins(settings.ClientAddress)
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
+    //builder.AddDefaultPolicy(o =>
+    //{
+    //    o.WithOrigins(settings.ClientAddress)
+    //        .AllowAnyMethod()
+    //        .AllowAnyHeader();
+    //});
 });
 
 builder.Services.AddHostedService<SignalRClientService>();

@@ -1,4 +1,5 @@
 ﻿using Common;
+using dyno_server.Configuration;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace dyno_server.Service;
@@ -8,37 +9,53 @@ public class SignalRClientService : BackgroundService
     private readonly ILogger<SignalRClientService> _logger;
     private readonly IMonitorService _monitorService;
     private readonly ITokenService _tokenService;
-    private HubConnection _connection;
+    private readonly IHubClient _hubClient;
+    private readonly IClientApiService _clientApiService;
+    private readonly AppConfiguration _configuration;
 
     public SignalRClientService(
         ILogger<SignalRClientService> logger,
         IMonitorService monitorService,
-        ITokenService tokenService)
+        ITokenService tokenService,
+        IHubClient hubClient,
+        IClientApiService clientApiService,
+        AppConfiguration appConfiguration)
     {
         _logger = logger;
         _monitorService = monitorService;
         _tokenService = tokenService;
+        _hubClient = hubClient;
+        _clientApiService = clientApiService;
+        _configuration = appConfiguration;
     }
 
     public override async Task StartAsync(CancellationToken cancellationToken)
     {
-        _connection = new HubConnectionBuilder()
-            .WithUrl("https://your-signalr-server-url/hub")
-            .Build();
+        _logger.LogInformation($"Starting background service {nameof(SignalRClientService)}");
 
-        _connection.On<string>("ReceiveMessage", (message) =>
+        _hubClient.On(SignalRMethods.MeasurementRequested, async (string name, string description, string duration) =>
         {
-            _logger.LogInformation($"Message received: {message}");
+            await HandleMeasurementRequested(name, description, duration);
         });
 
         await base.StartAsync(cancellationToken);
+    }
+
+    private async Task HandleMeasurementRequested(string name, string description, string duration)
+    {
+        _monitorService.Initialize();
+        await _monitorService.StartMonitoring(name, description, duration);
+        var result = _monitorService.GetResult();
+        await _tokenService.GetTokenAsync(_configuration.ServerUser, _configuration.ServerPassword);
+        await _clientApiService.CreateMeasurement(result);
+        await _hubClient.SendMessage(SignalRMethods.MeasurementCompleted);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         try
         {
-            await _connection.StartAsync(stoppingToken);
+            await _hubClient.ConnectAsync(stoppingToken);
             _logger.LogInformation("SignalR connection started.");
 
             while (!stoppingToken.IsCancellationRequested)
@@ -54,7 +71,7 @@ public class SignalRClientService : BackgroundService
 
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
-        await _connection.StopAsync();
+        await _hubClient.DisconnectAsync();
         _logger.LogInformation("SignalR connection stopped.");
         await base.StopAsync(cancellationToken);
     }

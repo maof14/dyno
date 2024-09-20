@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Common;
+using Microsoft.AspNetCore.SignalR;
 
 namespace dyno_api.SignalR;
 
@@ -10,8 +11,14 @@ public class DynoHub : Hub
         await Task.CompletedTask;
     }
 
-    public Task MeasurementRequested(string name, string description, string duration)
+    public async Task MeasurementRequested(string name, string description, string duration)
     {
-        throw new NotImplementedException();
+        await Clients.Others.SendAsync(SignalRMethods.MeasurementRequested, name, description, duration);
+    }
+
+    // from server
+    public async Task MeasurementCompleted()
+    {
+        await Clients.Others.SendAsync(SignalRMethods.MeasurementCompleted);
     }
 }
