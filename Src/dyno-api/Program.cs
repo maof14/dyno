@@ -11,6 +11,7 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using dyno_api.Helpers;
 using Service;
+using dyno_api.SignalR;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -39,6 +40,8 @@ builder.Services.AddSwaggerGen(o =>
         { jwtSecurityScheme, Array.Empty<string>() }
     });
 });
+
+builder.Services.AddSignalR();
 
 builder.Services.AddScoped<IRepository<MeasurementEntity>, MeasurementRepository>();
 builder.Services.AddTransient<IAuthHelpers, AuthHelpers>();
@@ -99,6 +102,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("GuiPolicy");
 app.UseCors("ServerPolicy");
+
+app.MapHub<DynoHub>("/dynohub");
 
 app.UseHttpsRedirection();
 

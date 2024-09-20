@@ -1,11 +1,10 @@
 using Common;
 using dyno_server.Configuration;
 using dyno_server.Service;
-using dyno_server.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSignalR();
+
 builder.Services.AddTransient<IMonitorService, MockMonitorService>();
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddTransient<JwtAuthorizationHandler>();
@@ -35,11 +34,11 @@ builder.Services.AddCors(builder =>
     });
 });
 
+builder.Services.AddHostedService<SignalRClientService>();
+
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-
-app.MapHub<DynoHub>("/dynohub");
 
 app.UseCors();
 
