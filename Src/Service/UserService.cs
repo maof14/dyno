@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Models;
 using Repository;
 
@@ -31,7 +32,8 @@ public class UserService : IUserService
             return Guid.Empty;
         }
 
-        var passwordCheck = _passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash, password);
+        var hashedPassword = _passwordHasher.HashPassword(appUser, password);
+        var passwordCheck = _passwordHasher.VerifyHashedPassword(appUser, hashedPassword, password);
 
         if (passwordCheck == PasswordVerificationResult.Success)
             return appUser.Id;
