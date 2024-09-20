@@ -26,22 +26,10 @@ builder.Services.AddHttpClient("TokenClient", client =>
     client.BaseAddress = new Uri(settings.ApiAddress);
 });
 
-builder.Services.AddCors(builder =>
-{
-    //builder.AddDefaultPolicy(o =>
-    //{
-    //    o.WithOrigins(settings.ClientAddress)
-    //        .AllowAnyMethod()
-    //        .AllowAnyHeader();
-    //});
-});
-
 builder.Services.AddHostedService<SignalRClientService>();
 
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-
-app.UseCors();
 
 app.Run();
