@@ -23,6 +23,7 @@ builder.Services.AddFluxor(options =>
 builder.Services.AddMudServices();
 
 var settings = builder.Configuration.GetSection(nameof(AppConfiguration)).Get<AppConfiguration>();
+builder.Services.AddSingleton(settings);
 
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddTransient<IHubClient, HubClient>();
