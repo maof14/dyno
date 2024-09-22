@@ -35,6 +35,22 @@ public class TokenService : ITokenService
         }
     }
 
+    public async Task<bool> RegisterAsync(string username, string password, string passwordRepeat)
+    {
+        var registerModel = new RegisterModel {
+            Username = username,
+            Password = password,
+            PasswordRepeat = passwordRepeat
+        };
+
+        var response = await _httpClient.PostAsJsonAsync($"{Routes.Auth}/{Routes.Register}", registerModel);
+
+        if(response.IsSuccessStatusCode)
+            return true;
+
+        return false;
+    }
+
     public void ResetToken()
     {
         Token = string.Empty;

@@ -27,6 +27,11 @@ public class TokenService : ITokenService
         Token = body.Token;
     }
 
+    public Task<bool> RegisterAsync(string username, string password, string passwordRepeat)
+    {
+        throw new NotImplementedException();
+    }
+
     public void ResetToken()
     {
         Token = string.Empty;

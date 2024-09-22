@@ -29,6 +29,20 @@ public class AppEffect
         dispatcher.Dispatch(new SetLoggedInStatusAction() { IsLoggedIn = true });
     }
 
+    [EffectMethod]
+    public async Task OnRegisterAction(RegisterAction action, IDispatcher dispatcher) {
+        try {
+            await _tokenService.RegisterAsync(action.Username, action.Password, action.PasswordRepeat);
+        }
+        catch (Exception)
+        {
+            dispatcher.Dispatch(new ToastSuccessAction() {SuccessMessage = "went to hell."});
+            return;
+        }
+
+        dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Register successful. You can now login. "});
+    }
+
     [EffectMethod(typeof(DeAuthenticateAction))]
     public Task OnDeauthenticateAction(IDispatcher dispatcher)
     {
