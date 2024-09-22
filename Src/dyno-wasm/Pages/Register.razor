@@ -1,0 +1,25 @@
+@page "/register"
+@using Fluxor.Blazor.Web.Components
+@using MudBlazor
+@inherits FluxorComponent
+
+<PageTitle>Register</PageTitle>
+
+<h1>Register user</h1>
+
+Welcome to the registering page.
+
+<MudGrid Class="justify-space-between" Style="max-width: 400px;">
+    <MudItem xs="12">
+        <MudTextField @bind-Value="@registerModel.Username" Label="Username" Variant="Variant.Text"></MudTextField>
+    </MudItem>
+    <MudItem xs="12">
+        <MudTextField @bind-Value="@registerModel.Password" Label="Password" Variant="Variant.Text" InputType="@InputType.Password"></MudTextField>
+    </MudItem>
+    <MudItem xs="12">
+        <MudTextField @bind-Value="@registerModel.PasswordRepeat" Label="Repeat password" Variant="Variant.Text" InputType="@InputType.Password"></MudTextField>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButton OnClick="HandleRegisterClick" Disabled="@(!AppState.Value.RegisteringEnabled)">Register</MudButton>
+    </MudItem>
+</MudGrid>
