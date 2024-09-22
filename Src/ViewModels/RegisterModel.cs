@@ -1,5 +1,6 @@
-using ViewModels;
+﻿namespace ViewModels;
 
-public class RegisterModel : LoginModel {
-    public string PasswordRepeat {get;set;}
+public class RegisterModel : LoginModel
+{
+    public string PasswordRepeat { get; set; }
 }

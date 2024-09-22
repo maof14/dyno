@@ -7,4 +7,5 @@ public class ApiConfiguration
     public string VaultUrl { get; set; }
     public string TenantId { get; set; }
     public string ClientId { get; set; }
+    public bool RegisteringAvailable { get; set; }
 }

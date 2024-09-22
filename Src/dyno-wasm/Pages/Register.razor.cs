@@ -1,6 +1,7 @@
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 using Store.App;
+using ViewModels;
 
 namespace dyno_wasm.Pages;
 
