@@ -5,4 +5,12 @@
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+@if(!AppState.Value.IsLoggedIn)
+{
+    <p>Start by registering an account, then login to see more.</p>
+} else
+{
+    <p>Welcome! More will come here hopefully...</p>
+}
+
+
