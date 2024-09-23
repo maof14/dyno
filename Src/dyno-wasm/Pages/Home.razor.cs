@@ -4,16 +4,29 @@ using Store.App;
 
 namespace dyno_wasm.Pages;
 
-public partial class Home
+public partial class Home : IDisposable
 {
     [Inject]
     public IDispatcher Dispatcher { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    [Inject]
+    public IActionSubscriber Subscriber { get; set; }
+
+    public void Dispose()
     {
-        await base.OnInitializedAsync();
-        
+        Subscriber.UnsubscribeFromAllActions(this);
+    }
+
+    protected override void OnInitialized()
+    {
+        Subscriber.SubscribeToAction<SetRegisteringAvailableAction>(this, (action) =>
+        {
+            StateHasChanged();
+        });
+
         // todo move to nav or somewhre "global"
         Dispatcher.Dispatch(new InitHomeAction());
+
+        base.OnInitialized();
     }
 }
