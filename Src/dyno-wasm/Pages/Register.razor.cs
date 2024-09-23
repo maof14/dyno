@@ -25,7 +25,7 @@ public partial class Register : IDisposable {
     {
         ActionSubscriber.SubscribeToAction<RegisterSuccessAction>(this, (action) =>
         {
-            // NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/");
         });
         base.OnInitialized();
     }

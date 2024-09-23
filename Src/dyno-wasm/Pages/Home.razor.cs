@@ -13,6 +13,7 @@ public partial class Home
     {
         await base.OnInitializedAsync();
         
+        // todo move to nav or somewhre "global"
         Dispatcher.Dispatch(new InitHomeAction());
     }
 }

@@ -36,12 +36,12 @@ public class AppEffect
         }
         catch (Exception)
         {
-            dispatcher.Dispatch(new ToastSuccessAction() {SuccessMessage = "went to hell."});
+            dispatcher.Dispatch(new ToastSuccessAction() {SuccessMessage = "Registering did not work."});
             return;
         }
 
         dispatcher.Dispatch(new RegisterSuccessAction());
-        dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Register successful. You can now login. "});
+        dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Registering successful. You can now login. "});
     }
 
     [EffectMethod(typeof(DeAuthenticateAction))]
