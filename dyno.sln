@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-api", "Src\dyno-api\dy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-server", "Src\dyno-server\dyno-server.csproj", "{15E251D7-7710-4EAF-9715-51120323B90C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dyno-gui", "Src\dyno-gui\dyno-gui.csproj", "{AAF89452-2BC5-4C4E-8357-60120C903667}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{5DFC64E5-104F-4B63-9B5E-06E6A47BD2E5}"
 	ProjectSection(SolutionItems) = preProject
 		dyno.targets = dyno.targets
@@ -46,10 +44,6 @@ Global
 		{15E251D7-7710-4EAF-9715-51120323B90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15E251D7-7710-4EAF-9715-51120323B90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15E251D7-7710-4EAF-9715-51120323B90C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAF89452-2BC5-4C4E-8357-60120C903667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAF89452-2BC5-4C4E-8357-60120C903667}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAF89452-2BC5-4C4E-8357-60120C903667}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAF89452-2BC5-4C4E-8357-60120C903667}.Release|Any CPU.Build.0 = Release|Any CPU
 		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{310C4DF2-64C4-452C-86DA-FEE36D299253}.Release|Any CPU.ActiveCfg = Release|Any CPU
