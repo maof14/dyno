@@ -5,6 +5,7 @@ namespace Store.App;
 public record AppState
 {
     public bool IsLoggedIn { get; set; } = false;
+    public bool RegisteringEnabled { get; set; } = false;
 }
 
 public class AppFeature : Feature<AppState>

@@ -2,7 +2,6 @@
 using dyno_api.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models;
 using Service;
 using ViewModels;
 
@@ -28,7 +27,7 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("login")]
+    [HttpPost(Routes.Login)]
     public async Task<ActionResult> Login([FromBody] LoginModel login)
     {
         var success = await _userService.Authenticate(login.Username, login.Password);
@@ -42,14 +41,23 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
-    [HttpPost("register")]
-    public async Task<ActionResult> Register([FromBody] LoginModel login)
+    [HttpGet(Routes.RegisteringAvailable)]
+    public ActionResult RegisteringAvailable() => Ok(_apiConfiguration.RegisteringAvailable);
+
+    [HttpPost(Routes.Register)]
+    public async Task<ActionResult> Register([FromBody] RegisterModel registerModel)
     {
-        var result = await _userService.CreateUser(login.Username, login.Username);
+        if (!_apiConfiguration.RegisteringAvailable)
+            return Problem();
+
+        if (!registerModel.Password.Equals(registerModel.PasswordRepeat, StringComparison.Ordinal))
+            return BadRequest("Passwords don't match.");
+
+        var result = await _userService.CreateUser(registerModel.Username, registerModel.Username);
 
         if (result)
             return Ok();
 
-        return BadRequest();
+        return Problem();
     }
 }
