@@ -1,6 +1,5 @@
 ﻿using Common;
 using System.Net.Http.Json;
-using System.Text.Json;
 using ViewModels;
 
 namespace Service;
@@ -15,6 +14,11 @@ public class TokenService : ITokenService
     }
 
     public string Token { get; private set; }
+
+    public async Task<bool> GetRegisteringAvailableStatus()
+    {
+        return await _httpClient.GetFromJsonAsync<bool>($"{Routes.Auth}/{Routes.RegisteringAvailable}");
+    }
 
     public async Task GetTokenAsync(string username, string password)
     {

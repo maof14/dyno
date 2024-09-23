@@ -18,3 +18,11 @@ public class RegisterAction {
 }
 
 public class DeAuthenticateAction { }
+
+public class InitHomeAction { }
+
+public class SetRegisteringAvailableAction { 
+    public bool RegisteringAvailable { get; set; }  
+}
+
+public class RegisterSuccessAction { }

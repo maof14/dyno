@@ -27,7 +27,7 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("login")]
+    [HttpPost(Routes.Login)]
     public async Task<ActionResult> Login([FromBody] LoginModel login)
     {
         var success = await _userService.Authenticate(login.Username, login.Password);
@@ -41,7 +41,10 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
-    [HttpPost("register")]
+    [HttpGet(Routes.RegisteringAvailable)]
+    public ActionResult RegisteringAvailable() => Ok(_apiConfiguration.RegisteringAvailable);
+
+    [HttpPost(Routes.Register)]
     public async Task<ActionResult> Register([FromBody] RegisterModel registerModel)
     {
         if (!_apiConfiguration.RegisteringAvailable)

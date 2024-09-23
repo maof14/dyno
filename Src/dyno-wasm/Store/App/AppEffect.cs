@@ -40,6 +40,7 @@ public class AppEffect
             return;
         }
 
+        dispatcher.Dispatch(new RegisterSuccessAction());
         dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Register successful. You can now login. "});
     }
 
@@ -51,5 +52,13 @@ public class AppEffect
         dispatcher.Dispatch(new SetLoggedInStatusAction() { IsLoggedIn = false });
 
         return Task.CompletedTask;
+    }
+
+    [EffectMethod]
+    public async Task OnInitHomeAction(InitHomeAction action, IDispatcher dispatcher)
+    {
+        var result = await _tokenService.GetRegisteringAvailableStatus();
+
+        dispatcher.Dispatch(new SetRegisteringAvailableAction() { RegisteringAvailable = result });
     }
 }

@@ -12,4 +12,13 @@ public class AppReducer
             IsLoggedIn = action.IsLoggedIn
         };
     }
+
+    [ReducerMethod]
+    public static AppState OnSetRegisteringAvailableAction(AppState state, SetRegisteringAvailableAction action)
+    {
+        return state with
+        {
+            RegisteringEnabled = action.RegisteringAvailable
+        };
+    } 
 }

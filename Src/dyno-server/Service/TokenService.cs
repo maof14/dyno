@@ -14,6 +14,11 @@ public class TokenService : ITokenService
 
     public string Token { get; private set; }
 
+    public Task<bool> GetRegisteringAvailableStatus()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task GetTokenAsync(string username, string password)
     {
         var token = await _httpClient.PostAsJsonAsync($"{Routes.Auth}/{Routes.Login}", new
