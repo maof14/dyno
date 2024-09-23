@@ -14,7 +14,6 @@ public partial class Register : IDisposable {
     public IState<AppState> AppState {get;set;}
 
     private RegisterModel registerModel = new();
-    private bool disposedValue;
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
