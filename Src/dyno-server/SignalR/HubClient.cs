@@ -14,9 +14,15 @@ public class HubClient : IHubClient
         IMonitorService monitorService,
         AppConfiguration configuration)
     {
+        var retryPolicy = new ExponentialBackoffRetryPolicy(
+            initialDelay: TimeSpan.FromSeconds(1),
+            maxDelay: TimeSpan.FromSeconds(30),
+            maxAttempts: 100);
+
         var url = configuration.HubBaseAddress;
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(url.AppendPathSegment("/dynohub"))
+            .WithAutomaticReconnect(retryPolicy)
             .Build();
     }
 
