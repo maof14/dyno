@@ -10,6 +10,9 @@ public partial class Home : IDisposable
     public IDispatcher Dispatcher { get; set; }
 
     [Inject]
+    public IState<AppState> AppState { get; set; }
+
+    [Inject]
     public IActionSubscriber Subscriber { get; set; }
 
     public void Dispose()
