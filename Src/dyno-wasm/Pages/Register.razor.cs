@@ -23,15 +23,17 @@ public partial class Register : IDisposable {
 
     protected override void OnInitialized()
     {
-        SubscribeToAction<RegisterSuccessAction>((action) =>
+        ActionSubscriber.SubscribeToAction<RegisterSuccessAction>(this, (action) =>
         {
             // NavigationManager.NavigateTo("/");
         });
+        base.OnInitialized();
     }
 
     private void HandleRegisterClick() {
         Dispatcher.Dispatch(new RegisterAction { Username = registerModel.Username, Password = registerModel.Password, PasswordRepeat = registerModel.PasswordRepeat });
     }
+
     public void Dispose()
     {
         ActionSubscriber.UnsubscribeFromAllActions(this);
