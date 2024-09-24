@@ -5,7 +5,6 @@ using dyno_server.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddTransient<IMonitorService, MockMonitorService>();
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
 builder.Services.AddTransient<JwtAuthorizationHandler>();
@@ -31,5 +30,6 @@ builder.Services.AddHostedService<SignalRClientService>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
+app.MapGet($"/ping/{Routes.AreYouAlive}", IResult () => TypedResults.Ok());
 
 app.Run();
