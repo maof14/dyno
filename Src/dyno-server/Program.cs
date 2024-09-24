@@ -2,6 +2,8 @@ using Common;
 using dyno_server.Configuration;
 using dyno_server.Service;
 using dyno_server.SignalR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,5 +33,6 @@ builder.Services.AddHostedService<SignalRClientService>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
+app.MapGet($"/ping/{Routes.AreYouAlive}", IResult () => TypedResults.Ok());
 
 app.Run();
