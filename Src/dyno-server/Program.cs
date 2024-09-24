@@ -2,11 +2,8 @@ using Common;
 using dyno_server.Configuration;
 using dyno_server.Service;
 using dyno_server.SignalR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddTransient<IMonitorService, MockMonitorService>();
 builder.Services.AddTransient<IClientApiService, ClientApiService>();
