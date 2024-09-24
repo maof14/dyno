@@ -26,3 +26,7 @@ public class SetRegisteringAvailableAction {
 }
 
 public class RegisterSuccessAction { }
+
+public class SetLoadingAction { 
+    public bool IsLoading { get; set; }
+}

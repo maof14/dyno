@@ -6,6 +6,7 @@ public record AppState
 {
     public bool IsLoggedIn { get; set; } = false;
     public bool RegisteringEnabled { get; set; } = false;
+    public bool IsLoading { get; set; } = false;
 }
 
 public class AppFeature : Feature<AppState>

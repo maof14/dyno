@@ -1,4 +1,9 @@
-﻿@inherits LayoutComponentBase
+﻿@using Fluxor
+@using Store.App
+@inherits LayoutComponentBase
+
+@inject IState<AppState> AppState
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -15,6 +20,8 @@
     </main>
 </div>
 <Toast />
+
+<MudOverlay @bind-Visible="@AppState.Value.IsLoading" DarkBackground AutoClose="true" />
 
 @* Required *@
 <MudThemeProvider />
