@@ -21,4 +21,13 @@ public class AppReducer
             RegisteringEnabled = action.RegisteringAvailable
         };
     } 
+
+    [ReducerMethod]
+    public static AppState SetLoadingAction(AppState state, SetLoadingAction action)
+    {
+        return state with
+        {
+            IsLoading = action.IsLoading
+        };
+    }
 }
