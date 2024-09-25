@@ -92,7 +92,7 @@ public class SignalRClientService : BackgroundService
                 retryCount++;
                 _logger.LogError($"{nameof(SignalRClientService)}:{nameof(StartConnectionAsync)} - Failed to connect to SignalR: {ex.Message}. Attempt: {retryCount}/{_configuration.MaxHubConnectionRetries}.");
 
-                if (retryCount >= _configuration.MaxHubConnectionRetries || DateTime.UtcNow - startTime >= TimeSpan.FromMinutes(_configuration.MaxHubConnectionRetryDurationInMinutes))
+                if (retryCount >= _configuration.MaxHubConnectionRetries)
                 {
                     _logger.LogError($"{nameof(SignalRClientService)}:{nameof(StartConnectionAsync)} - Max retry limit reached. Giving up on connecting to SignalR.");
                     break;

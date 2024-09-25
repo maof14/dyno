@@ -9,5 +9,4 @@ public class AppConfiguration
 
     public int MaxHubConnectionRetries { get; set; }
     public int MaxHubConnectionRetryDelayInSeconds { get; set; }
-    public int MaxHubConnectionRetryDurationInMinutes { get; set; }
 }
