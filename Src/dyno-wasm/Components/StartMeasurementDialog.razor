@@ -6,9 +6,9 @@
     </TitleContent>
     <DialogContent>
         Measurement parameters
-        <MudTextField Label="Name" @bind-Value="_measurementName"></MudTextField>
-        <MudTextField Lines="3" Label="Description" @bind-Value="_measurementDescription"></MudTextField>
-        <MudTextField Label="Duration" @bind-Value="_duration"></MudTextField>
+        <MudTextField Label="Name" @bind-Value="_measurementName" HelperText="A name of the measurement that helps you identify it."></MudTextField>
+        <MudTextField Lines="3" Label="Description" @bind-Value="_measurementDescription" HelperText="A description that contains some specific info to the measurement."></MudTextField>
+        <MudTextField Label="Duration" @bind-Value="_duration" HelperText="An integer that marks the duration i.e 30."></MudTextField>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
