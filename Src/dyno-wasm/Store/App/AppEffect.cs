@@ -19,7 +19,6 @@ public class AppEffect
         try
         {
             dispatcher.Dispatch(new SetLoadingAction { IsLoading = true });
-            await Task.Delay(5000);
             await _tokenService.GetTokenAsync(action.Username, action.Password);
         }
         catch (Exception)
