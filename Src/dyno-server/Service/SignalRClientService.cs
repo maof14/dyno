@@ -12,6 +12,7 @@ public class SignalRClientService : BackgroundService
     private readonly IHubClient _hubClient;
     private readonly IClientApiService _clientApiService;
     private readonly AppConfiguration _configuration;
+    private readonly TimeSpan _maxReconnectionDelay;
     private readonly Random _random = new Random();
 
     public SignalRClientService(
@@ -28,6 +29,7 @@ public class SignalRClientService : BackgroundService
         _hubClient = hubClient;
         _clientApiService = clientApiService;
         _configuration = appConfiguration;
+        _maxReconnectionDelay = TimeSpan.FromMinutes(_configuration.MaxHubConnectionRetryDelayInSeconds);
     }
 
     public override async Task StartAsync(CancellationToken cancellationToken)
@@ -76,11 +78,9 @@ public class SignalRClientService : BackgroundService
 
     private async Task StartConnectionAsync(CancellationToken stoppingToken)
     {
+        var retryCount = 0;
         while (!stoppingToken.IsCancellationRequested)
         {
-            var retryCount = 0;
-            DateTime startTime = DateTime.UtcNow;
-
             try
             {
                 await _hubClient.ConnectAsync(stoppingToken);
@@ -113,7 +113,7 @@ public class SignalRClientService : BackgroundService
         double jitterFactor = 0.8 + (_random.NextDouble() * 0.4);
         double delayMilliseconds = baseDelay.TotalMilliseconds * Math.Pow(2, retryCount) * jitterFactor;
 
-        return TimeSpan.FromMilliseconds(Math.Min(delayMilliseconds, TimeSpan.FromMinutes(_configuration.MaxHubConnectionRetryDelayInSeconds).TotalMilliseconds));
+        return TimeSpan.FromMilliseconds(Math.Min(delayMilliseconds, _maxReconnectionDelay.TotalMilliseconds));
     }
 
     public override async Task StopAsync(CancellationToken cancellationToken)

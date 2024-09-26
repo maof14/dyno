@@ -30,6 +30,6 @@ builder.Services.AddHostedService<SignalRClientService>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet($"/ping/{Routes.AreYouAlive}", IResult () => TypedResults.Ok());
+app.MapGet($"/{Routes.Ping}/{Routes.AreYouAlive}", IResult () => TypedResults.Ok());
 
 app.Run();

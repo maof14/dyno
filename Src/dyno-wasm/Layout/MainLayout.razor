@@ -1,8 +1,28 @@
 ﻿@using Fluxor
 @using Store.App
 @inherits LayoutComponentBase
+@implements IDisposable
 
 @inject IState<AppState> AppState
+@inject IActionSubscriber ActionSubscriber;
+
+@code {
+    protected override void OnInitialized()
+    {
+        ActionSubscriber.SubscribeToAction<SetLoadingAction>(this, (action) =>
+        {
+            StateHasChanged();
+        });
+
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        ActionSubscriber.UnsubscribeFromAllActions(this);
+    }
+}
+
 
 <div class="page">
     <div class="sidebar">
@@ -14,14 +34,16 @@
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 
+        <MudOverlay @bind-Visible="@AppState.Value.IsLoading" DarkBackground>
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        </MudOverlay>
+
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
 <Toast />
-
-<MudOverlay @bind-Visible="AppState.Value.IsLoading" DarkBackground AutoClose="true" />
 
 @* Required *@
 <MudThemeProvider />

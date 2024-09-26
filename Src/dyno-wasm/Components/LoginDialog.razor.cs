@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using ViewModels;
 
@@ -14,4 +15,10 @@ public partial class LoginDialog
     private void Submit() => MudDialog.Close(DialogResult.Ok(LoginModel));
 
     private void Cancel() => MudDialog.Cancel();
+
+    private void OnKeyPress(KeyboardEventArgs e)
+    {
+        if(e.Key == "Enter")
+            Submit();
+    }
 }
