@@ -53,4 +53,15 @@ public class MeasurementController : ControllerBase
 
         return Ok();
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        var result = await _measurementRepository.Delete(id);
+
+        if (result)
+            return Ok();
+
+        return Problem();
+    }
 }

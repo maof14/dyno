@@ -46,6 +46,32 @@ public class MeasurementRepository : IRepository<MeasurementEntity>
             }
         }
     }
+
+    public async Task<bool> Delete(Guid id)
+    {
+        using (var tx = _dbContext.Database.BeginTransaction())
+        {
+            var success = false;
+            try
+            {
+                var measurement = await _dbContext.Measurements.FirstAsync(x => x.Id == id);
+
+                if(measurement != null)
+                {
+                    _dbContext.Measurements.Attach(measurement);
+                    _dbContext.Measurements.Remove(measurement);
+                    await _dbContext.SaveChangesAsync();
+                    await tx.CommitAsync();
+                    success = true;
+                }
+            }
+            catch (Exception)
+            {
+                await tx.RollbackAsync();
+            }
+            return success;
+        }
+    }
 }
 
 
