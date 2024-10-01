@@ -57,6 +57,11 @@ public partial class Dyno : IAsyncDisposable
         await HubClient.SendMessage(SignalRMethods.Test);
     }
 
+    private void HandleRefreshClick()
+    {
+        Dispatcher.Dispatch(new ReloadMeasurementViewAction());
+    }
+
     public async new Task DisposeAsync()
     {
         await HubClient.DisposeAsync();

@@ -14,6 +14,7 @@
 
     <MudButton OnClick="TestConnection">Test connection</MudButton>
     <MudButton OnClick="InitializeNewMeasurement" Disabled="@MeasurementState.Value.Running">Start new measurement</MudButton>
+    <MudButton StartIcon="@Icons.Material.Filled.Refresh" OnClick="HandleRefreshClick">Refresh</MudButton>
 
     <MudTable T="MeasurementModel" Items="@Measurements" Hover="true" Loading="@MeasurementState.Value.IsLoading" OnRowClick="HandleRowClick">
         <HeaderContent>
