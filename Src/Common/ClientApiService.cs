@@ -6,6 +6,7 @@ namespace Common;
 public interface IClientApiService
 {
     Task CreateMeasurement(MeasurementModel result);
+    Task DeleteMeasurement(Guid id);
     Task<List<MeasurementModel>> GetMeasurementModels();
 }
 
@@ -25,6 +26,16 @@ public class ClientApiService : IClientApiService
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception("Error posting result");
+        }
+    }
+
+    public async Task DeleteMeasurement(Guid id)
+    {
+        var response = await httpClient.DeleteAsync($"{Routes.Measurements}/{id}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception("Error deleting result");
         }
     }
 

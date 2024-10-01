@@ -52,6 +52,11 @@ public partial class Dyno : IAsyncDisposable
         await base.OnAfterRenderAsync(firstRender);
     }
 
+    private void HandleDeleteClick(Guid id)
+    {
+        Dispatcher.Dispatch(new DeleteMeasurementAction { Id = id});
+    }
+
     private async Task TestConnection()
     {
         await HubClient.SendMessage(SignalRMethods.Test);
