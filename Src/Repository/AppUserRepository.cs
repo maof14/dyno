@@ -32,6 +32,11 @@ public class AppUserRepository : IRepository<AppUserEntity>
         }
     }
 
+    public Task<bool> Delete(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<AppUserEntity> Get(Guid id)
     {
         return await _dbContext

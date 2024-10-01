@@ -1,5 +1,6 @@
 ﻿using Common;
 using Fluxor;
+using Store.SharedActions;
 
 namespace Store.Measurements;
 
@@ -37,5 +38,23 @@ public class MeasurementEffect
         }
 
         dispatcher.Dispatch(new SetMeasurementsLoadingAction() { IsLoading = false });
+    }
+
+    [EffectMethod]
+    public async Task OnDeleteMeasurementAction(DeleteMeasurementAction action, IDispatcher dispatcher)
+    {
+        try
+        {
+            dispatcher.Dispatch(new SetMeasurementsLoadingAction { IsLoading = true });
+            await _clientApiService.DeleteMeasurement(action.Id);
+        }
+        catch (Exception) {
+            dispatcher.Dispatch(new SetMeasurementsLoadingAction { IsLoading = false });
+            return;
+        }
+
+        dispatcher.Dispatch(new SetMeasurementsLoadingAction { IsLoading = false });
+        dispatcher.Dispatch(new ToastSuccessAction { SuccessMessage = "Measurement deleted." });
+        dispatcher.Dispatch(new ReloadMeasurementViewAction());
     }
 }

@@ -5,8 +5,8 @@
         Log in
     </TitleContent>
     <DialogContent>
-        <MudTextField Label="Username" @bind-Value="LoginModel.Username"></MudTextField>
-        <MudTextField Label="Password" @bind-Value="LoginModel.Password" InputType="InputType.Password"></MudTextField>
+        <MudTextField Label="Username" @bind-Value="LoginModel.Username" Immediate="true"></MudTextField>
+        <MudTextField Label="Password" @bind-Value="LoginModel.Password" InputType="InputType.Password" Immediate="true"></MudTextField>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>

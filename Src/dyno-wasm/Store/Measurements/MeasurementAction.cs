@@ -30,3 +30,8 @@ public class ClearMeasurementsAction
 {
 
 }
+
+public class DeleteMeasurementAction
+{
+    public Guid Id { get; set; }
+}
