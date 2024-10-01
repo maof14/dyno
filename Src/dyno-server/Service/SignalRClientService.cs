@@ -51,6 +51,8 @@ public class SignalRClientService : BackgroundService
         var result = _monitorService.GetResult();
         await _tokenService.GetTokenAsync(_configuration.ServerUser, _configuration.ServerPassword);
         await _clientApiService.CreateMeasurement(result);
+
+        await Task.Delay(500);
         await _hubClient.SendMessage(SignalRMethods.MeasurementCompleted);
     }
 
