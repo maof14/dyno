@@ -12,6 +12,16 @@
 {
     <p>This list displays all available measurements. Click one to view details, or generate a new.</p>
 
+    <MudExpansionPanels>
+        <MudExpansionPanel Text="Concepts and explanations (click to expand)">
+            <p>A measurement contains the data recorded for a engine run. A measurement is started here when you want to record the performance of the engine. The data is then recorded for a selected interval and presented in the measurement details. You can specify a name and a description for the measurement to keep track of changes made to it. For instance "tuesday run" as name and description "Used nitro fuel" could make sense. </p>
+            <p>The measurement is recorded on the server connected to the engine, then sent to the API in the cloud. When it is stored in the cloud, it is sent to the client (this page) for viewing. The diagram in the measurement details can be tuned to preference in the future. </p>
+            <p>The data recorded as of now is of mock (= bullsh*t) data and should not be taken too seriously. Its just randomized numbers that imitate a engine running at different RPMs.</p>
+        </MudExpansionPanel>
+    </MudExpansionPanels>  
+
+    <br />
+
     <MudButton OnClick="TestConnection">Test connection</MudButton>
     <MudButton OnClick="InitializeNewMeasurement" Disabled="@MeasurementState.Value.Running">Start new measurement</MudButton>
     <MudButton StartIcon="@Icons.Material.Filled.Refresh" OnClick="HandleRefreshClick">Refresh</MudButton>
