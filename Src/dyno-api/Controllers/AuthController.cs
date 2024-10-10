@@ -30,11 +30,11 @@ public class AuthController : ControllerBase
     [HttpPost(Routes.Login)]
     public async Task<ActionResult> Login([FromBody] LoginModel login)
     {
-        var success = await _userService.Authenticate(login.Username, login.Password);
+        var userId = await _userService.Authenticate(login.Username, login.Password);
 
-        if(success != Guid.Empty)
+        if(userId != Guid.Empty)
         {
-            var token = _authHelpers.GenerateJwtToken(login.Username);
+            var token = _authHelpers.GenerateJwtToken(userId, login.Username);
             return Ok(new { token });
         }
 

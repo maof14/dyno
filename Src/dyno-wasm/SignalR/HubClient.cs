@@ -11,18 +11,23 @@ namespace SignalR;
 public class HubClient : IHubClient
 {
     private HubConnection _hubConnection;
+    private readonly ITokenService _tokenService;
     private readonly AppConfiguration _configuration;
 
-    public HubClient(IDispatcher dispatcher, AppConfiguration configuration)
+    public HubClient(IDispatcher dispatcher, AppConfiguration configuration, ITokenService tokenService)
     {
         // Todo use On methods instead of having dependency to dispatcher here.. .. 
 
+        _tokenService = tokenService;
         _configuration = configuration;
         Dispatcher = dispatcher;
 
         var url = _configuration.HubBaseAddress;
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl(url.AppendPathSegment("/dynohub"))
+            .WithUrl(url.AppendPathSegment("/dynohub"), options =>
+            {
+                options.AccessTokenProvider = () => Task.FromResult(_tokenService.Token);
+            })
             .Build();
 
         _hubConnection.On(SignalRMethods.MeasurementCompleted, () =>

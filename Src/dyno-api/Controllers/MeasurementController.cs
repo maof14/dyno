@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Repository;
+using System.Security.Claims;
 using ViewModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,8 +45,12 @@ public class MeasurementController : ControllerBase
     public async Task<ActionResult> Post([FromBody] MeasurementModel measurementModel)
     {
         // Some validation here perhaps. 
+        var sub = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        var entity = MeasurementConverters.Convert(measurementModel);
+        if (!Guid.TryParse(sub, out var userId))
+            return Problem();
+        // Här blir det FK-fel. troligtvis för att användaren inte finns eller nåt sånt. Men konstigt att det då gick att patcha db. Aja. Hej da!! 
+        var entity = MeasurementConverters.ConvertWithUserId(measurementModel, userId);
         var result = await _measurementRepository.Create(entity);
 
         if(!result)

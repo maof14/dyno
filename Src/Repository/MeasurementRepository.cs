@@ -18,6 +18,7 @@ public class MeasurementRepository : IRepository<MeasurementEntity>
         return await _dbContext
             .Measurements
             .Include(x => x.MeasurementResults)
+            .Include(x => x.AppUser)
             .FirstAsync(x => x.Id == id);
     }
 
@@ -26,6 +27,7 @@ public class MeasurementRepository : IRepository<MeasurementEntity>
         return await _dbContext
             .Measurements
             .Include(x => x.MeasurementResults)
+            .Include(x => x.AppUser)
             .ToListAsync();
     }
 

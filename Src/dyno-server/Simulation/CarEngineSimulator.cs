@@ -110,6 +110,7 @@ public class CarEngineSimulator
             id: Guid.NewGuid(),
             name: _name,
             description: _description,
+            createdBy: string.Empty,
             measurementResults: _dataLog,
             DateTimeOffset.Now);
     }
