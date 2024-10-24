@@ -4,7 +4,13 @@ using ViewModels;
 
 namespace Service;
 
-public class TokenService : ITokenService
+public interface IClientTokenService : ITokenService
+{
+    Task<bool> RegisterAsync(string username, string password, string passwordRepeat);
+    Task<bool> GetRegisteringAvailableStatus();
+}
+
+public class TokenService : IClientTokenService
 {
     private HttpClient _httpClient;
 

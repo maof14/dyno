@@ -3,6 +3,7 @@ using Configuration;
 using Flurl;
 using Fluxor;
 using Microsoft.AspNetCore.SignalR.Client;
+using Service;
 using Store.Measurements;
 using Store.SharedActions;
 using System.Text.Json;
@@ -13,11 +14,11 @@ namespace SignalR;
 public class HubClient : IHubClient
 {
     private HubConnection _hubConnection;
-    private readonly ITokenService _tokenService;
+    private readonly IClientTokenService _tokenService;
     private readonly IClientApiService _clientApiService;
     private readonly AppConfiguration _configuration;
 
-    public HubClient(IDispatcher dispatcher, AppConfiguration configuration, ITokenService tokenService, IClientApiService clientApiService)
+    public HubClient(IDispatcher dispatcher, AppConfiguration configuration, IClientTokenService tokenService, IClientApiService clientApiService)
     {
         // Todo use On methods instead of having dependency to dispatcher here.. .. 
 

@@ -1,14 +1,15 @@
 ﻿using Common;
 using Fluxor;
+using Service;
 using Store.SharedActions;
 
 namespace Store.App;
 
 public class AppEffect
 {
-    private readonly ITokenService _tokenService;
+    private readonly IClientTokenService _tokenService;
 
-    public AppEffect(ITokenService tokenService)
+    public AppEffect(IClientTokenService tokenService)
     {
         _tokenService = tokenService;
     }

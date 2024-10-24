@@ -1,4 +1,6 @@
-﻿namespace Common;
+﻿using System.Net.Http.Headers;
+
+namespace Common;
 
 public class JwtAuthorizationHandler : DelegatingHandler
 {
@@ -12,7 +14,7 @@ public class JwtAuthorizationHandler : DelegatingHandler
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var token = _tokenService.Token;
-        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         return base.SendAsync(request, cancellationToken);
     }
