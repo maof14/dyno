@@ -5,6 +5,8 @@ using Fluxor;
 using Microsoft.AspNetCore.SignalR.Client;
 using Store.Measurements;
 using Store.SharedActions;
+using System.Text.Json;
+using ViewModels;
 
 namespace SignalR;
 
@@ -12,14 +14,16 @@ public class HubClient : IHubClient
 {
     private HubConnection _hubConnection;
     private readonly ITokenService _tokenService;
+    private readonly IClientApiService _clientApiService;
     private readonly AppConfiguration _configuration;
 
-    public HubClient(IDispatcher dispatcher, AppConfiguration configuration, ITokenService tokenService)
+    public HubClient(IDispatcher dispatcher, AppConfiguration configuration, ITokenService tokenService, IClientApiService clientApiService)
     {
         // Todo use On methods instead of having dependency to dispatcher here.. .. 
 
         _tokenService = tokenService;
         _configuration = configuration;
+        _clientApiService = clientApiService;
         Dispatcher = dispatcher;
 
         var url = _configuration.HubBaseAddress;
@@ -30,8 +34,12 @@ public class HubClient : IHubClient
             })
             .Build();
 
-        _hubConnection.On(SignalRMethods.MeasurementCompleted, () =>
+        _hubConnection.On(SignalRMethods.MeasurementCompleted, async (string measurementData) =>
         {
+            var result = JsonSerializer.Deserialize<MeasurementModel>(measurementData);
+
+            await _clientApiService.CreateMeasurement(result);
+
             Dispatcher.Dispatch(new ToastSuccessAction() { SuccessMessage = "Measurement completed." });
             Dispatcher.Dispatch(new ReloadMeasurementViewAction());
         });

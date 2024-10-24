@@ -1,6 +1,8 @@
 ﻿using Common;
 using dyno_server.Configuration;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace dyno_server.Service;
 
@@ -47,13 +49,12 @@ public class SignalRClientService : BackgroundService
     private async Task HandleMeasurementRequestedAsync(string name, string description, string duration)
     {
         _monitorService.Initialize();
-        await _monitorService.StartMonitoring(name, description, duration);
+        await _monitorService.StartMonitoring(name, description, duration); // Todo: these parameters can be removed, not needed in the service really. 
         var result = _monitorService.GetResult();
-        await _tokenService.GetTokenAsync(_configuration.ServerUser, _configuration.ServerPassword);
-        await _clientApiService.CreateMeasurement(result);
 
-        await Task.Delay(500);
-        await _hubClient.SendMessage(SignalRMethods.MeasurementCompleted);
+
+        var jsonResult = JsonSerializer.Serialize(result);
+        await _hubClient.SendMessage(SignalRMethods.MeasurementCompleted, jsonResult);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
