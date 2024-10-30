@@ -7,7 +7,7 @@ namespace dyno_api.Helpers;
 
 public interface IAuthHelpers
 {
-    string GenerateJwtToken(string username);
+    string GenerateJwtToken(Guid userId, string username);
 }
 
 public class AuthHelpers : IAuthHelpers
@@ -19,14 +19,17 @@ public class AuthHelpers : IAuthHelpers
         _configuration = configuration;
     }
 
-    public string GenerateJwtToken(string username)
+    public string GenerateJwtToken(Guid userId, string username)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["JwtSecret"]); // Use same secret key as in authentication setup
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[] { new Claim("sub", username) }), // Use actual user data here
+            Subject = new ClaimsIdentity([ 
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Name, username)
+            ]),
             Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };

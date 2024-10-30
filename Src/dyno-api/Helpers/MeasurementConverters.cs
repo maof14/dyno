@@ -11,19 +11,30 @@ internal static class MeasurementConverters
             id: measurement.Id,
             name: measurement.Name,
             description: measurement.Description,
+            createdBy: measurement.AppUser.Username,
             dateTime: measurement.DateTimeOffset,
-            measurementResults: measurement.MeasurementResults.Select(y => new MeasurementResultModel(id: y.Id, torque: y.Torque, rPM: y.RPM, horsepower: y.Horsepower, dateTimeOffset: y.DateTimeOffset))
-            .ToList());
+            measurementResults: measurement.MeasurementResults.Select(y => new MeasurementResultModel(
+                id: y.Id,
+                torque: y.Torque,
+                rPM: y.RPM,
+                horsepower: y.Horsepower,
+                dateTimeOffset: y.DateTimeOffset))
+            .ToList()); 
     }
-
-    internal static MeasurementEntity Convert(MeasurementModel measurementModel)
+    internal static MeasurementEntity ConvertWithUserId(MeasurementModel measurementModel, Guid appUserId)
     {
         return new MeasurementEntity(
             id: measurementModel.Id,
             name: measurementModel.Name,
             description: measurementModel.Description,
             dateTimeOffset: measurementModel.DateTime,
-            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResultEntity(id: y.Id, torque: y.Torque, rPM: y.RPM, horsepower: y.Horsepower, dateTimeOffset: y.DateTimeOffset))
+            appUserId: appUserId,
+            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResultEntity(
+                id: y.Id,
+                torque: y.Torque,
+                rPM: y.RPM,
+                horsepower: y.Horsepower,
+                dateTimeOffset: y.DateTimeOffset))
             .ToList());
     }
 }

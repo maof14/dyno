@@ -29,6 +29,11 @@ public class DynoDbContext : DbContext
 
         modelBuilder.Entity<MeasurementResultEntity>()
             .HasOne(x => x.Measurement);
+
+        modelBuilder.Entity<MeasurementEntity>()
+            .HasOne(x => x.AppUser)
+            .WithMany(x => x.Measurements)
+            .HasForeignKey(x => x.AppUserId);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)

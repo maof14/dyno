@@ -16,9 +16,8 @@ public class DynoHub : Hub
         await Clients.Others.SendAsync(SignalRMethods.MeasurementRequested, name, description, duration);
     }
 
-    // from server
-    public async Task MeasurementCompleted()
+    public async Task MeasurementCompleted(string measurementData)
     {
-        await Clients.Others.SendAsync(SignalRMethods.MeasurementCompleted);
+        await Clients.Others.SendAsync(SignalRMethods.MeasurementCompleted, measurementData);
     }
 }

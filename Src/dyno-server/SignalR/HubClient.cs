@@ -9,11 +9,14 @@ namespace dyno_server.SignalR;
 public class HubClient : IHubClient
 {
     private readonly HubConnection _hubConnection;
+    private ITokenService _tokenService;
 
     public HubClient(
         IMonitorService monitorService,
-        AppConfiguration configuration)
+        AppConfiguration configuration,
+        ITokenService tokenService)
     {
+        _tokenService = tokenService;
         var retryPolicy = new ExponentialBackoffRetryPolicy(
             initialDelay: TimeSpan.FromSeconds(1),
             maxDelay: TimeSpan.FromSeconds(30),
@@ -21,7 +24,10 @@ public class HubClient : IHubClient
 
         var url = configuration.HubBaseAddress;
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl(url.AppendPathSegment("/dynohub"))
+            .WithUrl(url.AppendPathSegment("/dynohub"), options =>
+            {
+                options.AccessTokenProvider = () => Task.FromResult(_tokenService.Token);
+            })
             .WithAutomaticReconnect(retryPolicy)
             .Build();
     }

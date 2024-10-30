@@ -7,6 +7,6 @@ public interface IMonitorService
     void Initialize(); // Sätt upp koppling mot GPIO
     void Cleanup(); // Rensa upp resurser
 
-    Task StartMonitoring(string name, string description, string duration); // Starta en monitorering
+    Task StartMonitoring(string duration); // Starta en monitorering
     MeasurementModel GetResult();
 }
