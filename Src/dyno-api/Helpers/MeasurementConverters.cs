@@ -21,24 +21,6 @@ internal static class MeasurementConverters
                 dateTimeOffset: y.DateTimeOffset))
             .ToList()); 
     }
-
-    internal static MeasurementEntity Convert(MeasurementModel measurementModel)
-    {
-        return new MeasurementEntity(
-            id: measurementModel.Id,
-            name: measurementModel.Name,
-            description: measurementModel.Description,
-            appUserId: Guid.Empty,
-            dateTimeOffset: measurementModel.DateTime,
-            measurementResults: measurementModel.MeasurementResults.Select(y => new MeasurementResultEntity(
-                id: y.Id,
-                torque: y.Torque,
-                rPM: y.RPM,
-                horsepower: y.Horsepower,
-                dateTimeOffset: y.DateTimeOffset))
-            .ToList());
-    }
-    // Todo en av dessa ska bort..?
     internal static MeasurementEntity ConvertWithUserId(MeasurementModel measurementModel, Guid appUserId)
     {
         return new MeasurementEntity(

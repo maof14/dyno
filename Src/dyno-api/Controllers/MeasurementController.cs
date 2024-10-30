@@ -49,7 +49,7 @@ public class MeasurementController : ControllerBase
 
         if (!Guid.TryParse(sub, out var userId))
             return Problem();
-        // Här blir det FK-fel. troligtvis för att användaren inte finns eller nåt sånt. Men konstigt att det då gick att patcha db. Aja. Hej da!! 
+
         var entity = MeasurementConverters.ConvertWithUserId(measurementModel, userId);
         var result = await _measurementRepository.Create(entity);
 

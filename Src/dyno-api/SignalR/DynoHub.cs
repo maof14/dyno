@@ -13,7 +13,6 @@ public class DynoHub : Hub
 
     public async Task MeasurementRequested(string name, string description, string duration)
     {
-        // Todo: Use token on SignalR to get the user that requested it.. 
         await Clients.Others.SendAsync(SignalRMethods.MeasurementRequested, name, description, duration);
     }
 

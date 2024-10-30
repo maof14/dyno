@@ -15,9 +15,6 @@ public class CarEngineSimulator
     private double _currentTorque;
     private List<MeasurementResultModel> _dataLog;
 
-    private string _name;
-    private string _description;
-
     public CarEngineSimulator()
     {
         _currentRPM = IdleRPM;
@@ -79,11 +76,8 @@ public class CarEngineSimulator
     }
 
     // Start the engine and collect data for a specified duration (in seconds)
-    public async Task RunEngineAsync(string name, string description, int durationInSeconds)
+    public async Task RunEngineAsync(int durationInSeconds)
     {
-        _name = name;
-        _description = description;
-
         Console.WriteLine("Engine starting...");
 
         for (int elapsedTime = 0; elapsedTime < durationInSeconds; elapsedTime++)
@@ -108,8 +102,8 @@ public class CarEngineSimulator
     {
         return new MeasurementModel(
             id: Guid.NewGuid(),
-            name: _name,
-            description: _description,
+            name: string.Empty,
+            description: string.Empty,
             createdBy: string.Empty,
             measurementResults: _dataLog,
             DateTimeOffset.Now);
